@@ -1,6 +1,8 @@
 package me.fineasgavre.apm.toylanguage.Domain.ADTs;
 
 import me.fineasgavre.apm.toylanguage.Domain.ADTs.Interfaces.ITLList;
+import me.fineasgavre.apm.toylanguage.Exceptions.ADT.IndexOutOfBoundsTLException;
+import me.fineasgavre.apm.toylanguage.Exceptions.TLException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,17 +16,32 @@ public class TLList<T> implements ITLList<T> {
     }
 
     @Override
-    public void remove(int index) {
+    public void remove(int index) throws TLException {
+        if (index < 0 || index >= list.size()) {
+            throw new IndexOutOfBoundsTLException(index, list.size());
+        }
+
         list.remove(index);
     }
 
     @Override
-    public T get(int index) {
+    public T get(int index) throws TLException {
+        if (index < 0 || index >= list.size()) {
+            throw new IndexOutOfBoundsTLException(index, list.size());
+        }
+
         return list.get(index);
     }
 
     @Override
     public int size() {
         return list.size();
+    }
+
+    @Override
+    public String toString() {
+        return "TLList{" +
+                "list=" + list +
+                '}';
     }
 }

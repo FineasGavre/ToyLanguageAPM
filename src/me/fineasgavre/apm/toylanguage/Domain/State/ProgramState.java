@@ -14,11 +14,23 @@ public class ProgramState {
     private ITLMap<String, IValue> symbolTable;
     private ITLList<IValue> output;
 
+    private IStatement originalStatement;
+
     public ProgramState(IStatement originalStatement) {
         this.executionStack = new TLStack<>();
         this.symbolTable = new TLMap<>();
         this.output = new TLList<>();
 
+        this.originalStatement = originalStatement.clone();
+        this.executionStack.push(originalStatement);
+    }
+
+    public ProgramState(ITLStack<IStatement> executionStack, ITLMap<String, IValue> symbolTable, ITLList<IValue> output, IStatement originalStatement) {
+        this.executionStack = executionStack;
+        this.symbolTable = symbolTable;
+        this.output = output;
+
+        this.originalStatement = originalStatement.clone();
         this.executionStack.push(originalStatement);
     }
 
@@ -44,5 +56,15 @@ public class ProgramState {
 
     public void setOutput(ITLList<IValue> output) {
         this.output = output;
+    }
+
+    @Override
+    public String toString() {
+        return "ProgramState{" +
+                "executionStack=" + executionStack +
+                ", symbolTable=" + symbolTable +
+                ", output=" + output +
+                ", originalStatement=" + originalStatement +
+                '}';
     }
 }

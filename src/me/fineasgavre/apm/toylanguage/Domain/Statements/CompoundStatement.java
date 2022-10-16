@@ -4,8 +4,8 @@ import me.fineasgavre.apm.toylanguage.Domain.State.ProgramState;
 import me.fineasgavre.apm.toylanguage.Domain.Statements.Interfaces.IStatement;
 
 public class CompoundStatement implements IStatement {
-    private final IStatement firstStatement;
-    private final IStatement secondStatement;
+    private IStatement firstStatement;
+    private IStatement secondStatement;
 
     public CompoundStatement(IStatement firstStatement, IStatement secondStatement) {
         this.firstStatement = firstStatement;
@@ -20,6 +20,18 @@ public class CompoundStatement implements IStatement {
         executionStack.push(firstStatement);
 
         return programState;
+    }
+
+    @Override
+    public IStatement clone() {
+        try {
+            var clone = (CompoundStatement) super.clone();
+            clone.firstStatement = this.firstStatement.clone();
+            clone.secondStatement = this.secondStatement.clone();
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
