@@ -30,8 +30,24 @@ public class TLStack<T> implements ITLStack<T> {
 
     @Override
     public String toString() {
-        return "TLStack{" +
-                "stack=" + stack +
-                '}';
+        var stringBuilder = new StringBuilder();
+        stringBuilder.append("TLStack (");
+        stringBuilder.append(stack.size());
+        stringBuilder.append(" entries)");
+
+        var iterator = stack.listIterator();
+        if (iterator.hasNext()) {
+            stringBuilder.append("\n");
+        }
+
+        while (iterator.hasNext()) {
+            var value = iterator.next().toString();
+
+            stringBuilder.append(iterator.hasNext() ? "• " : "> ");
+            stringBuilder.append(value);
+            stringBuilder.append(iterator.hasNext() ? "\n" : "");
+        }
+
+        return stringBuilder.toString();
     }
 }

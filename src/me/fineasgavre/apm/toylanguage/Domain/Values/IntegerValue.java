@@ -22,9 +22,7 @@ public class IntegerValue implements IValue {
 
     @Override
     public String toString() {
-        return "IntegerValue{" +
-                "value=" + value +
-                '}';
+        return "" + value;
     }
 
     @Override

@@ -17,9 +17,7 @@ public class BooleanValue implements IValue {
 
     @Override
     public String toString() {
-        return "BooleanValue{" +
-                "value=" + value +
-                '}';
+        return "" + value;
     }
 
     @Override

@@ -36,8 +36,26 @@ public class TLMap<K, V> implements ITLMap<K, V> {
 
     @Override
     public String toString() {
-        return "TLMap{" +
-                "map=" + map +
-                '}';
+        var stringBuilder = new StringBuilder();
+        stringBuilder.append("TLMap (");
+        stringBuilder.append(map.size());
+        stringBuilder.append(" entries)");
+
+        var iterator = map.entrySet().iterator();
+        if (iterator.hasNext()) {
+            stringBuilder.append("\n");
+        }
+
+        while (iterator.hasNext()) {
+            var value = iterator.next();
+
+            stringBuilder.append("• ");
+            stringBuilder.append(value.getKey().toString());
+            stringBuilder.append(" -> ");
+            stringBuilder.append(value.getValue().toString());
+            stringBuilder.append(iterator.hasNext() ? "\n" : "");
+        }
+
+        return stringBuilder.toString();
     }
 }

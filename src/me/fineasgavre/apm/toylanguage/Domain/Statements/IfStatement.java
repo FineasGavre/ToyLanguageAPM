@@ -51,10 +51,6 @@ public class IfStatement implements IStatement {
 
     @Override
     public String toString() {
-        return "IfStatement{" +
-                "conditionExpression=" + conditionExpression +
-                ", thenStatement=" + thenStatement +
-                ", elseStatement=" + elseStatement +
-                '}';
+        return "if (" + conditionExpression + ")\n   then: " + thenStatement + "\n   else: " + elseStatement + "\nendif";
     }
 }

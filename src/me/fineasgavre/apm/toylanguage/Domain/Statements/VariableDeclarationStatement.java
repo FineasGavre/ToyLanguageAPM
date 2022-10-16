@@ -42,9 +42,6 @@ public class VariableDeclarationStatement implements IStatement {
 
     @Override
     public String toString() {
-        return "VariableDeclarationStatement{" +
-                "variableId='" + variableId + '\'' +
-                ", variableType=" + variableType +
-                '}';
+        return variableType + " " + variableId;
     }
 }

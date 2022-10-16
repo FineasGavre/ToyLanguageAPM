@@ -58,6 +58,10 @@ public class ProgramState {
         this.output = output;
     }
 
+    public IStatement getOriginalStatement() {
+        return originalStatement;
+    }
+
     @Override
     public String toString() {
         return "ProgramState{" +

@@ -15,9 +15,10 @@ public class PrintStatement implements IStatement {
     @Override
     public ProgramState execute(ProgramState programState) throws TLException {
         var symbolTable = programState.getSymbolTable();
+        var output = programState.getOutput();
 
         var value = this.expression.evaluate(symbolTable);
-        System.out.println(value);
+        output.add(value);
 
         return programState;
     }
@@ -25,7 +26,9 @@ public class PrintStatement implements IStatement {
     @Override
     public IStatement clone() {
         try {
-            return (PrintStatement) super.clone();
+            var clone = (PrintStatement) super.clone();
+            clone.expression = this.expression.clone();
+            return clone;
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
@@ -33,8 +36,6 @@ public class PrintStatement implements IStatement {
 
     @Override
     public String toString() {
-        return "PrintStatement{" +
-                "expression=" + expression +
-                '}';
+        return "print(" + expression + ")";
     }
 }

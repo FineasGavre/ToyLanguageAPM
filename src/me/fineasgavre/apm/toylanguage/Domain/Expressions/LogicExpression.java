@@ -13,7 +13,28 @@ public class LogicExpression implements IExpression {
         EQUALS,
         NOT_EQUALS,
         AND,
-        OR
+        OR;
+
+        @Override
+        public String toString() {
+            switch (this) {
+                case EQUALS -> {
+                    return "==";
+                }
+                case NOT_EQUALS -> {
+                    return "!=";
+                }
+                case AND -> {
+                    return "&&";
+                }
+                case OR -> {
+                    return "||";
+                }
+                default -> {
+                    return "?";
+                }
+            }
+        }
     }
 
     private IExpression expression1;

@@ -7,9 +7,11 @@ import me.fineasgavre.apm.toylanguage.Exceptions.Execution.EmptyExecutionStackTL
 import me.fineasgavre.apm.toylanguage.Exceptions.TLException;
 import me.fineasgavre.apm.toylanguage.Repository.Interfaces.IProgramStateRepository;
 import me.fineasgavre.apm.toylanguage.Repository.SingleThreadProgramStateRepository;
+import me.fineasgavre.apm.toylanguage.Utils.PrintUtils;
 
 public class ProgramStateController {
     private final IProgramStateRepository programStateRepository;
+    private boolean isDebugMode = false;
 
     public ProgramStateController() {
         this.programStateRepository = new SingleThreadProgramStateRepository();
@@ -48,7 +50,9 @@ public class ProgramStateController {
     }
 
     private void displayProgramState(ProgramState programState) {
-        System.out.println(programState);
+        if (this.isDebugMode) {
+            PrintUtils.printProgramState(programState, false);
+        }
     }
 
     private ProgramState executeOneStep(ProgramState programState) throws TLException {
@@ -60,5 +64,9 @@ public class ProgramStateController {
 
         var currentStatement = executionStack.pop();
         return currentStatement.execute(programState);
+    }
+
+    public void setDebugMode(boolean debugMode) {
+        isDebugMode = debugMode;
     }
 }

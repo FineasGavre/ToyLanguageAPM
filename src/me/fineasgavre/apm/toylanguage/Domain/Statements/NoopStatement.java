@@ -21,6 +21,6 @@ public class NoopStatement implements IStatement {
 
     @Override
     public String toString() {
-        return "NoopStatement{}";
+        return "noop()";
     }
 }

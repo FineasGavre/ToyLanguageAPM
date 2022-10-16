@@ -29,8 +29,6 @@ public class ValueExpression implements IExpression {
 
     @Override
     public String toString() {
-        return "ValueExpression{" +
-                "value=" + value +
-                '}';
+        return "(" + this.value + ")";
     }
 }

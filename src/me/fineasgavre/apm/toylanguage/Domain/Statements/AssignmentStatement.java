@@ -49,9 +49,6 @@ public class AssignmentStatement implements IStatement {
 
     @Override
     public String toString() {
-        return "AssignmentStatement{" +
-                "variableId='" + variableId + '\'' +
-                ", expression=" + expression +
-                '}';
+        return "[" + variableId + "]" + " <- " + expression.toString();
     }
 }

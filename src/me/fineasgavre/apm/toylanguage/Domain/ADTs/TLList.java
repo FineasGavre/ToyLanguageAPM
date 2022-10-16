@@ -40,8 +40,24 @@ public class TLList<T> implements ITLList<T> {
 
     @Override
     public String toString() {
-        return "TLList{" +
-                "list=" + list +
-                '}';
+        var stringBuilder = new StringBuilder();
+        stringBuilder.append("TLList (");
+        stringBuilder.append(list.size());
+        stringBuilder.append(" entries)");
+
+        var iterator = list.iterator();
+        if (iterator.hasNext()) {
+            stringBuilder.append("\n");
+        }
+
+        while (iterator.hasNext()) {
+            var value = iterator.next().toString();
+
+            stringBuilder.append("• ");
+            stringBuilder.append(value);
+            stringBuilder.append(iterator.hasNext() ? "\n" : "");
+        }
+
+        return stringBuilder.toString();
     }
 }

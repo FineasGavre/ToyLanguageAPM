@@ -14,7 +14,28 @@ public class ArithmeticExpression implements IExpression {
         ADDITION,
         SUBTRACTION,
         MULTIPLICATION,
-        DIVISION
+        DIVISION;
+
+        @Override
+        public String toString() {
+            switch (this) {
+                case ADDITION -> {
+                    return "+";
+                }
+                case SUBTRACTION -> {
+                    return "-";
+                }
+                case MULTIPLICATION -> {
+                    return "*";
+                }
+                case DIVISION -> {
+                    return "/";
+                }
+                default -> {
+                    return "?";
+                }
+            }
+        }
     }
 
     private IExpression expression1;
@@ -81,10 +102,6 @@ public class ArithmeticExpression implements IExpression {
 
     @Override
     public String toString() {
-        return "ArithmeticExpression{" +
-                "expression1=" + expression1 +
-                ", expression2=" + expression2 +
-                ", arithmeticOperation=" + arithmeticOperation +
-                '}';
+        return "(" + this.expression1 + ") " + this.arithmeticOperation + " (" + this.expression2 + ")";
     }
 }

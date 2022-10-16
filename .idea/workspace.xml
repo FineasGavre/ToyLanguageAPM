@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="24b7e68d-5d00-4224-917f-b3f3e4902261" name="Changes" comment="add: interfaces and implementations for Stack/List/Map ADTs">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Statements/CompoundStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Statements/Interfaces/IStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="24b7e68d-5d00-4224-917f-b3f3e4902261" name="Changes" comment="add: A2 lab completed">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/jansi_2_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/jansi-2.1.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Utils/BuiltInPrograms.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Utils/ConsoleColors.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Utils/PrintUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToyLanguageAPM.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ToyLanguageAPM.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Controller/ProgramStateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Controller/ProgramStateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/ADTs/TLList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/ADTs/TLList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/ADTs/TLMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/ADTs/TLMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/ADTs/TLStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/ADTs/TLStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Expressions/ArithmeticExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Expressions/ArithmeticExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Expressions/LogicExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Expressions/LogicExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Expressions/ValueExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Expressions/ValueExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Expressions/VariableExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Expressions/VariableExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/State/ProgramState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/State/ProgramState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Statements/AssignmentStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Statements/AssignmentStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Statements/CompoundStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Statements/CompoundStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Statements/IfStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Statements/IfStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Statements/NoopStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Statements/NoopStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Statements/PrintStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Statements/PrintStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Statements/VariableDeclarationStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Statements/VariableDeclarationStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Values/BooleanValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Values/BooleanValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Values/IntegerValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Values/IntegerValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/View/CommandLineView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/View/CommandLineView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +37,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -45,9 +66,32 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/finea/UniversityProjects/Advanced Programming Methods/ToyLanguageAPM/lib/jansi-2.1.0.jar",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.updates"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\finea\UniversityProjects\Advanced Programming Methods\ToyLanguageAPM\lib" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="ToyLanguageAPM" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -56,7 +100,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1664908771923</updated>
-      <workItem from="1664908776015" duration="3081000" />
+      <workItem from="1664908776015" duration="3437000" />
+      <workItem from="1665924564957" duration="11463000" />
     </task>
     <task id="LOCAL-00001" summary="add: interfaces and implementations for Stack/List/Map ADTs">
       <created>1664913012448</created>
@@ -65,7 +110,28 @@
       <option name="project" value="LOCAL" />
       <updated>1664913012448</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add: CompoundStatement concrete implementation">
+      <created>1664959758054</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1664959758054</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add(chore): IntelliJ IDEA project files">
+      <created>1664959784840</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1664959784840</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add: A2 lab completed">
+      <created>1665931815847</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1665931815847</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -84,6 +150,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add: interfaces and implementations for Stack/List/Map ADTs" />
-    <option name="LAST_COMMIT_MESSAGE" value="add: interfaces and implementations for Stack/List/Map ADTs" />
+    <MESSAGE value="add: CompoundStatement concrete implementation" />
+    <MESSAGE value="add(chore): IntelliJ IDEA project files" />
+    <MESSAGE value="add: A2 lab completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="add: A2 lab completed" />
   </component>
 </project>

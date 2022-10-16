@@ -36,9 +36,6 @@ public class CompoundStatement implements IStatement {
 
     @Override
     public String toString() {
-        return "CompoundStatement{" +
-                "firstStatement=" + firstStatement +
-                ", secondStatement=" + secondStatement +
-                '}';
+        return firstStatement + ";\n" + secondStatement;
     }
 }

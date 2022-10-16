@@ -35,8 +35,6 @@ public class VariableExpression implements IExpression {
 
     @Override
     public String toString() {
-        return "VariableExpression{" +
-                "variableId='" + variableId + '\'' +
-                '}';
+        return "[" + variableId + "]";
     }
 }
