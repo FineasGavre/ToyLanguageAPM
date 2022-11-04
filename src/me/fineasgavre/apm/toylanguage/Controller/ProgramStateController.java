@@ -66,6 +66,10 @@ public class ProgramStateController {
         return currentStatement.execute(programState);
     }
 
+    public ProgramState getCurrentProgramState() {
+        return this.programStateRepository.getCurrentProgramState();
+    }
+
     public void setDebugMode(boolean debugMode) {
         isDebugMode = debugMode;
     }
