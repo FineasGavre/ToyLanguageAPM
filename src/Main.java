@@ -1,5 +1,8 @@
+import me.fineasgavre.apm.toylanguage.View.CommandLineView;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        var view = new CommandLineView();
+        view.execute();
     }
 }
