@@ -7,8 +7,10 @@ import me.fineasgavre.apm.toylanguage.Domain.Statements.*;
 import me.fineasgavre.apm.toylanguage.Domain.Statements.Interfaces.IStatement;
 import me.fineasgavre.apm.toylanguage.Domain.Types.BooleanType;
 import me.fineasgavre.apm.toylanguage.Domain.Types.IntegerType;
+import me.fineasgavre.apm.toylanguage.Domain.Types.StringType;
 import me.fineasgavre.apm.toylanguage.Domain.Values.BooleanValue;
 import me.fineasgavre.apm.toylanguage.Domain.Values.IntegerValue;
+import me.fineasgavre.apm.toylanguage.Domain.Values.StringValue;
 
 public class BuiltInPrograms {
     public static IStatement PROGRAM1 = new CompoundStatement(
@@ -63,7 +65,33 @@ public class BuiltInPrograms {
                                             new AssignmentStatement("v", new ValueExpression(new IntegerValue(2))),
                                             new AssignmentStatement("v", new ValueExpression(new IntegerValue(3)))
                                     ),
-                                    new PrintStatement(new VariableExpression("t"))
+                                    new PrintStatement(new VariableExpression("v"))
+                            )
+                    )
+            )
+    );
+
+    public static IStatement PROGRAM4 = new CompoundStatement(
+            new VariableDeclarationStatement("filePath", new StringType()),
+            new CompoundStatement(
+                    new AssignmentStatement("filePath", new ValueExpression(new StringValue("test.in"))),
+                    new CompoundStatement(
+                            new OpenReadFileStatement(new VariableExpression("filePath")),
+                            new CompoundStatement(
+                                    new VariableDeclarationStatement("fileData", new IntegerType()),
+                                    new CompoundStatement(
+                                            new ReadFileStatement(new VariableExpression("filePath"), "fileData"),
+                                            new CompoundStatement(
+                                                    new PrintStatement(new VariableExpression("fileData")),
+                                                    new CompoundStatement(
+                                                            new ReadFileStatement(new VariableExpression("filePath"), "fileData"),
+                                                            new CompoundStatement(
+                                                                    new PrintStatement(new VariableExpression("fileData")),
+                                                                    new CloseReadFileStatement(new VariableExpression("filePath"))
+                                                            )
+                                                    )
+                                            )
+                                    )
                             )
                     )
             )

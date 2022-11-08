@@ -8,10 +8,14 @@ import me.fineasgavre.apm.toylanguage.Domain.ADTs.TLMap;
 import me.fineasgavre.apm.toylanguage.Domain.ADTs.TLStack;
 import me.fineasgavre.apm.toylanguage.Domain.Statements.Interfaces.IStatement;
 import me.fineasgavre.apm.toylanguage.Domain.Values.Interfaces.IValue;
+import me.fineasgavre.apm.toylanguage.Domain.Values.StringValue;
+
+import java.io.BufferedReader;
 
 public class ProgramState {
     private ITLStack<IStatement> executionStack;
     private ITLMap<String, IValue> symbolTable;
+    private ITLMap<StringValue, BufferedReader> fileTable;
     private ITLList<IValue> output;
 
     private IStatement originalStatement;
@@ -19,15 +23,17 @@ public class ProgramState {
     public ProgramState(IStatement originalStatement) {
         this.executionStack = new TLStack<>();
         this.symbolTable = new TLMap<>();
+        this.fileTable = new TLMap<>();
         this.output = new TLList<>();
 
         this.originalStatement = originalStatement.clone();
         this.executionStack.push(originalStatement);
     }
 
-    public ProgramState(ITLStack<IStatement> executionStack, ITLMap<String, IValue> symbolTable, ITLList<IValue> output, IStatement originalStatement) {
+    public ProgramState(ITLStack<IStatement> executionStack, ITLMap<String, IValue> symbolTable, ITLMap<StringValue, BufferedReader> fileTable, ITLList<IValue> output, IStatement originalStatement) {
         this.executionStack = executionStack;
         this.symbolTable = symbolTable;
+        this.fileTable = fileTable;
         this.output = output;
 
         this.originalStatement = originalStatement.clone();
@@ -70,5 +76,13 @@ public class ProgramState {
                 ", output=" + output +
                 ", originalStatement=" + originalStatement +
                 '}';
+    }
+
+    public ITLMap<StringValue, BufferedReader> getFileTable() {
+        return fileTable;
+    }
+
+    public void setFileTable(ITLMap<StringValue, BufferedReader> fileTable) {
+        this.fileTable = fileTable;
     }
 }

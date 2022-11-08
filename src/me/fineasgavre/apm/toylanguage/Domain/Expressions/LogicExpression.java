@@ -97,10 +97,6 @@ public class LogicExpression implements IExpression {
 
     @Override
     public String toString() {
-        return "LogicExpression{" +
-                "expression1=" + expression1 +
-                ", expression2=" + expression2 +
-                ", logicOperation=" + logicOperation +
-                '}';
+        return "(" + expression1 + ") " + logicOperation.toString() + " (" + expression2 + ")";
     }
 }

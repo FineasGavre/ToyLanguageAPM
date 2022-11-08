@@ -32,9 +32,11 @@ public class ProgramStateController {
         }
 
         var currentProgramState = programStateRepository.getCurrentProgramState();
+        programStateRepository.logProgramStateExecution(currentProgramState);
 
         while (!currentProgramState.getExecutionStack().isEmpty()) {
             currentProgramState = executeOneStep(currentProgramState);
+            programStateRepository.logProgramStateExecution(currentProgramState);
             displayProgramState(currentProgramState);
         }
     }

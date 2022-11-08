@@ -27,6 +27,12 @@ public class Main {
         var runCommand3 = new RunExampleCommand("3", controller3);
         menu.addCommand(runCommand3);
 
+        var controller4 = new ProgramStateController();
+        controller4.setCurrentProgramFromStatement(BuiltInPrograms.PROGRAM4);
+        controller4.setDebugMode(debugMode);
+        var runCommand4 = new RunExampleCommand("4", controller4);
+        menu.addCommand(runCommand4);
+
         var exitCommand = new ExitCommand("0");
         menu.addCommand(exitCommand);
 

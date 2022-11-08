@@ -7,4 +7,6 @@ public interface ITLMap<K, V> {
     V get(K key) throws TLException;
     boolean containsKey(K key);
     void clear();
+
+    void clearKey(K key) throws TLException;
 }
