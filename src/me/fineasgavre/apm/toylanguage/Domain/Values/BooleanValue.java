@@ -4,6 +4,8 @@ import me.fineasgavre.apm.toylanguage.Domain.Types.BooleanType;
 import me.fineasgavre.apm.toylanguage.Domain.Types.Interfaces.IType;
 import me.fineasgavre.apm.toylanguage.Domain.Values.Interfaces.IValue;
 
+import java.util.Objects;
+
 public class BooleanValue implements IValue {
     private boolean value;
 
@@ -13,6 +15,19 @@ public class BooleanValue implements IValue {
 
     public boolean getValue() {
         return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BooleanValue that = (BooleanValue) o;
+        return value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 
     @Override
