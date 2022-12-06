@@ -1,3 +1,5 @@
+package me.fineasgavre.apm.toylanguage;
+
 import me.fineasgavre.apm.toylanguage.controller.ProgramStateController;
 import me.fineasgavre.apm.toylanguage.utils.BuiltInPrograms;
 import me.fineasgavre.apm.toylanguage.view.CommandLineMenu;
@@ -6,7 +8,7 @@ import me.fineasgavre.apm.toylanguage.view.commands.RunExampleCommand;
 
 public class Main {
     public static void main(String[] args) {
-        var debugMode = false;
+        var debugMode = true;
         var menu = new CommandLineMenu();
 
         var controller1 = new ProgramStateController();
@@ -32,6 +34,24 @@ public class Main {
         controller4.setDebugMode(debugMode);
         var runCommand4 = new RunExampleCommand("4", controller4);
         menu.addCommand(runCommand4);
+
+        var controller5 = new ProgramStateController();
+        controller5.setCurrentProgramFromStatement(BuiltInPrograms.PROGRAM5);
+        controller5.setDebugMode(debugMode);
+        var runCommand5 = new RunExampleCommand("5", controller5);
+        menu.addCommand(runCommand5);
+
+        var controller6 = new ProgramStateController();
+        controller6.setCurrentProgramFromStatement(BuiltInPrograms.PROGRAM6);
+        controller6.setDebugMode(debugMode);
+        var runCommand6 = new RunExampleCommand("6", controller6);
+        menu.addCommand(runCommand6);
+
+        var controller7 = new ProgramStateController();
+        controller7.setCurrentProgramFromStatement(BuiltInPrograms.PROGRAM7);
+        controller7.setDebugMode(debugMode);
+        var runCommand7 = new RunExampleCommand("7", controller7);
+        menu.addCommand(runCommand7);
 
         var exitCommand = new ExitCommand("0");
         menu.addCommand(exitCommand);

@@ -1,12 +1,14 @@
 package me.fineasgavre.apm.toylanguage.utils;
 
 import me.fineasgavre.apm.toylanguage.domain.expressions.ArithmeticExpression;
+import me.fineasgavre.apm.toylanguage.domain.expressions.ReadHeapExpression;
 import me.fineasgavre.apm.toylanguage.domain.expressions.ValueExpression;
 import me.fineasgavre.apm.toylanguage.domain.expressions.VariableExpression;
 import me.fineasgavre.apm.toylanguage.domain.statements.*;
 import me.fineasgavre.apm.toylanguage.domain.statements.interfaces.IStatement;
 import me.fineasgavre.apm.toylanguage.domain.types.BooleanType;
 import me.fineasgavre.apm.toylanguage.domain.types.IntegerType;
+import me.fineasgavre.apm.toylanguage.domain.types.RefType;
 import me.fineasgavre.apm.toylanguage.domain.types.StringType;
 import me.fineasgavre.apm.toylanguage.domain.values.BooleanValue;
 import me.fineasgavre.apm.toylanguage.domain.values.IntegerValue;
@@ -92,6 +94,62 @@ public class BuiltInPrograms {
                                                     )
                                             )
                                     )
+                            )
+                    )
+            )
+    );
+
+    public static IStatement PROGRAM5 = new CompoundStatement(
+            new VariableDeclarationStatement("v", new RefType(new IntegerType())),
+            new CompoundStatement(
+                    new AllocateHeapStatement("v", new ValueExpression(new IntegerValue(20))),
+                    new CompoundStatement(
+                            new VariableDeclarationStatement("a", new RefType(new RefType(new IntegerType()))),
+                            new CompoundStatement(
+                                    new AllocateHeapStatement("a", new VariableExpression("v")),
+                                    new CompoundStatement(
+                                            new PrintStatement(new VariableExpression("v")),
+                                            new PrintStatement(new VariableExpression("a"))
+                                    )
+                            )
+                    )
+            )
+    );
+
+    public static IStatement PROGRAM6 = new CompoundStatement(
+            new VariableDeclarationStatement("v", new RefType(new IntegerType())),
+            new CompoundStatement(
+                    new AllocateHeapStatement("v", new ValueExpression(new IntegerValue(20))),
+                    new CompoundStatement(
+                            new VariableDeclarationStatement("a", new RefType(new RefType(new IntegerType()))),
+                            new CompoundStatement(
+                                    new AllocateHeapStatement("a", new VariableExpression("v")),
+                                    new CompoundStatement(
+                                            new PrintStatement(new ReadHeapExpression(new VariableExpression("v"))),
+                                            new PrintStatement(new ArithmeticExpression(
+                                                    new ReadHeapExpression(new ReadHeapExpression(new VariableExpression("a"))),
+                                                    new ValueExpression(new IntegerValue(5)),
+                                                    ArithmeticExpression.ArithmeticOperation.ADDITION
+                                            ))
+                                    )
+                            )
+                    )
+            )
+    );
+
+    public static IStatement PROGRAM7 = new CompoundStatement(
+            new VariableDeclarationStatement("v", new RefType(new IntegerType())),
+            new CompoundStatement(
+                    new AllocateHeapStatement("v", new ValueExpression(new IntegerValue(20))),
+                    new CompoundStatement(
+                            new PrintStatement(new ReadHeapExpression(new VariableExpression("v"))),
+                            new CompoundStatement(
+                                    new WriteHeapStatement("v", new ValueExpression(new IntegerValue(30))),
+                                    new PrintStatement(new ArithmeticExpression(
+                                            new ReadHeapExpression(new VariableExpression("v")),
+                                            new ValueExpression(new IntegerValue(5)),
+                                            ArithmeticExpression.ArithmeticOperation.ADDITION
+                                    ))
                             )
                     )
             )

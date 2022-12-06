@@ -16,6 +16,7 @@ public class PrintUtils {
         PrintUtils.printHeadlineAndContent(ConsoleColors.CYAN_BACKGROUND + ConsoleColors.BLACK_BOLD, "   PROGRAM STATE   ", "", "");
         PrintUtils.printHeadlineAndContent(ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.BLACK_BOLD_BRIGHT, "  EXECUTION STACK  ", ConsoleColors.YELLOW, programState.getExecutionStack().toString());
         PrintUtils.printHeadlineAndContent(ConsoleColors.PURPLE_BACKGROUND + ConsoleColors.BLACK_BOLD_BRIGHT, "   SYMBOL TABLE    ", ConsoleColors.PURPLE, programState.getSymbolTable().toString());
+        PrintUtils.printHeadlineAndContent(ConsoleColors.PURPLE_BACKGROUND + ConsoleColors.BLACK_BOLD_BRIGHT, "   HEAP    ", ConsoleColors.PURPLE, programState.getHeap().toString());
         PrintUtils.printHeadlineAndContent(ConsoleColors.PURPLE_BACKGROUND + ConsoleColors.BLACK_BOLD_BRIGHT, "   FILE TABLE    ", ConsoleColors.PURPLE, programState.getFileTable().toString());
         PrintUtils.printHeadlineAndContent(ConsoleColors.GREEN_BACKGROUND + ConsoleColors.BLACK_BOLD_BRIGHT, "    OUTPUT LIST    ", ConsoleColors.GREEN, programState.getOutput().toString());
 

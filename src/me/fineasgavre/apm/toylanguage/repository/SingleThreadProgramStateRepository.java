@@ -44,6 +44,7 @@ public class SingleThreadProgramStateRepository implements IProgramStateReposito
             logFile.write("\n\n== STATE LOG \n");
             logFile.write("ExeStack:\n" + programState.getExecutionStack());
             logFile.write("\n\nSymTable:\n" + programState.getSymbolTable());
+            logFile.write("\n\nHeap:\n" + programState.getHeap());
             logFile.write("\n\nFileTable:\n" + programState.getFileTable());
             logFile.write("\n\nOutput:\n" + programState.getOutput());
             logFile.close();

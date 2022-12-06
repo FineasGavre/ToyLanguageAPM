@@ -1,5 +1,6 @@
 package me.fineasgavre.apm.toylanguage.domain.expressions;
 
+import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLHeap;
 import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
 import me.fineasgavre.apm.toylanguage.domain.expressions.interfaces.IExpression;
 import me.fineasgavre.apm.toylanguage.domain.values.interfaces.IValue;
@@ -14,7 +15,7 @@ public class VariableExpression implements IExpression {
     }
 
     @Override
-    public IValue evaluate(ITLMap<String, IValue> symbolTable) throws TLException {
+    public IValue evaluate(ITLMap<String, IValue> symbolTable, ITLHeap<IValue> heap) throws TLException {
         if (!symbolTable.containsKey(this.variableId)) {
             throw new UnknownVariableInExpressionTLException(this.variableId);
         }

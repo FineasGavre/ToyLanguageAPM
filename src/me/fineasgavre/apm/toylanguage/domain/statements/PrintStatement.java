@@ -15,9 +15,10 @@ public class PrintStatement implements IStatement {
     @Override
     public ProgramState execute(ProgramState programState) throws TLException {
         var symbolTable = programState.getSymbolTable();
+        var heap = programState.getHeap();
         var output = programState.getOutput();
 
-        var value = this.expression.evaluate(symbolTable);
+        var value = this.expression.evaluate(symbolTable, heap);
         output.add(value);
 
         return programState;

@@ -22,9 +22,10 @@ public class IfStatement implements IStatement {
     @Override
     public ProgramState execute(ProgramState programState) throws TLException {
         var executionStack = programState.getExecutionStack();
+        var heap = programState.getHeap();
         var symbolTable = programState.getSymbolTable();
 
-        var value = this.conditionExpression.evaluate(symbolTable);
+        var value = this.conditionExpression.evaluate(symbolTable, heap);
 
         if (!value.getType().equals(new BooleanType())) {
             throw new InvalidTypeStatementTLException(new BooleanType(), value.getType());
