@@ -1,8 +1,8 @@
-import me.fineasgavre.apm.toylanguage.Controller.ProgramStateController;
-import me.fineasgavre.apm.toylanguage.Utils.BuiltInPrograms;
-import me.fineasgavre.apm.toylanguage.View.CommandLineMenu;
-import me.fineasgavre.apm.toylanguage.View.Commands.ExitCommand;
-import me.fineasgavre.apm.toylanguage.View.Commands.RunExampleCommand;
+import me.fineasgavre.apm.toylanguage.controller.ProgramStateController;
+import me.fineasgavre.apm.toylanguage.utils.BuiltInPrograms;
+import me.fineasgavre.apm.toylanguage.view.CommandLineMenu;
+import me.fineasgavre.apm.toylanguage.view.commands.ExitCommand;
+import me.fineasgavre.apm.toylanguage.view.commands.RunExampleCommand;
 
 public class Main {
     public static void main(String[] args) {
