@@ -12,4 +12,8 @@ public interface ITLHeap<T> {
     T getValueForAddress(int address) throws UnknownKeyMapTLException;
 
     void writeToAddress(int address, T value) throws UnknownKeyMapTLException;
+
+    ITLMap<Integer, T> getContent();
+
+    void setContent(ITLMap<Integer, T> content);
 }

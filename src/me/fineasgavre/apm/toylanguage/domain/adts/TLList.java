@@ -34,6 +34,11 @@ public class TLList<T> implements ITLList<T> {
     }
 
     @Override
+    public boolean hasValue(T value) {
+        return list.contains(value);
+    }
+
+    @Override
     public int size() {
         return list.size();
     }

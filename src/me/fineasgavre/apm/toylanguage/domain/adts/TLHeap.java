@@ -43,6 +43,16 @@ public class TLHeap<T> implements ITLHeap<T> {
     }
 
     @Override
+    public ITLMap<Integer, T> getContent() {
+        return map;
+    }
+
+    @Override
+    public void setContent(ITLMap<Integer, T> content) {
+        this.map = content;
+    }
+
+    @Override
     public String toString() {
         return map.toString();
     }

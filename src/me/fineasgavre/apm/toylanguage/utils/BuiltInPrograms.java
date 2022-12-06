@@ -1,9 +1,6 @@
 package me.fineasgavre.apm.toylanguage.utils;
 
-import me.fineasgavre.apm.toylanguage.domain.expressions.ArithmeticExpression;
-import me.fineasgavre.apm.toylanguage.domain.expressions.ReadHeapExpression;
-import me.fineasgavre.apm.toylanguage.domain.expressions.ValueExpression;
-import me.fineasgavre.apm.toylanguage.domain.expressions.VariableExpression;
+import me.fineasgavre.apm.toylanguage.domain.expressions.*;
 import me.fineasgavre.apm.toylanguage.domain.statements.*;
 import me.fineasgavre.apm.toylanguage.domain.statements.interfaces.IStatement;
 import me.fineasgavre.apm.toylanguage.domain.types.BooleanType;
@@ -151,6 +148,48 @@ public class BuiltInPrograms {
                                             ArithmeticExpression.ArithmeticOperation.ADDITION
                                     ))
                             )
+                    )
+            )
+    );
+
+    public static IStatement PROGRAM8 = new CompoundStatement(
+            new VariableDeclarationStatement("v", new RefType(new IntegerType())),
+            new CompoundStatement(
+                    new AllocateHeapStatement("v", new ValueExpression(new IntegerValue(20))),
+                    new CompoundStatement(
+                            new VariableDeclarationStatement("a", new RefType(new RefType(new IntegerType()))),
+                            new CompoundStatement(
+                                    new AllocateHeapStatement("a", new VariableExpression("v")),
+                                    new CompoundStatement(
+                                            new AllocateHeapStatement("v", new ValueExpression(new IntegerValue(30))),
+                                            new PrintStatement(new ReadHeapExpression(new ReadHeapExpression(new VariableExpression("a"))))
+                                    )
+                            )
+                    )
+            )
+    );
+
+    public static IStatement PROGRAM9 = new CompoundStatement(
+            new VariableDeclarationStatement("v", new IntegerType()),
+            new CompoundStatement(
+                    new AssignmentStatement("v", new ValueExpression(new IntegerValue(4))),
+                    new CompoundStatement(
+                            new WhileStatement(
+                                    new RelationalExpression(
+                                            new VariableExpression("v"),
+                                            new ValueExpression(new IntegerValue(0)),
+                                            RelationalExpression.RelationalOperation.GREATER_THAN
+                                    ),
+                                    new CompoundStatement(
+                                            new PrintStatement(new VariableExpression("v")),
+                                            new AssignmentStatement("v", new ArithmeticExpression(
+                                                    new VariableExpression("v"),
+                                                    new ValueExpression(new IntegerValue(1)),
+                                                    ArithmeticExpression.ArithmeticOperation.SUBTRACTION
+                                            ))
+                                    )
+                            ),
+                            new PrintStatement(new VariableExpression("v"))
                     )
             )
     );
