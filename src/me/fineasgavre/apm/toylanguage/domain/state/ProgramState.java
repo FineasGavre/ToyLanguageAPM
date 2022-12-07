@@ -1,5 +1,7 @@
 package me.fineasgavre.apm.toylanguage.domain.state;
 
+import me.fineasgavre.apm.toylanguage.domain.adts.TLHeap;
+import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLHeap;
 import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLList;
 import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
 import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLStack;
@@ -15,6 +17,7 @@ import java.io.BufferedReader;
 public class ProgramState {
     private ITLStack<IStatement> executionStack;
     private ITLMap<String, IValue> symbolTable;
+    private ITLHeap<IValue> heap;
     private ITLMap<StringValue, BufferedReader> fileTable;
     private ITLList<IValue> output;
 
@@ -23,6 +26,7 @@ public class ProgramState {
     public ProgramState(IStatement originalStatement) {
         this.executionStack = new TLStack<>();
         this.symbolTable = new TLMap<>();
+        this.heap = new TLHeap<>();
         this.fileTable = new TLMap<>();
         this.output = new TLList<>();
 
@@ -30,9 +34,10 @@ public class ProgramState {
         this.executionStack.push(originalStatement);
     }
 
-    public ProgramState(ITLStack<IStatement> executionStack, ITLMap<String, IValue> symbolTable, ITLMap<StringValue, BufferedReader> fileTable, ITLList<IValue> output, IStatement originalStatement) {
+    public ProgramState(ITLStack<IStatement> executionStack, ITLMap<String, IValue> symbolTable, ITLHeap<IValue> heap, ITLMap<StringValue, BufferedReader> fileTable, ITLList<IValue> output, IStatement originalStatement) {
         this.executionStack = executionStack;
         this.symbolTable = symbolTable;
+        this.heap = heap;
         this.fileTable = fileTable;
         this.output = output;
 
@@ -56,6 +61,22 @@ public class ProgramState {
         this.symbolTable = symbolTable;
     }
 
+    public ITLHeap<IValue> getHeap() {
+        return heap;
+    }
+
+    public void setHeap(ITLHeap<IValue> heap) {
+        this.heap = heap;
+    }
+
+    public ITLMap<StringValue, BufferedReader> getFileTable() {
+        return fileTable;
+    }
+
+    public void setFileTable(ITLMap<StringValue, BufferedReader> fileTable) {
+        this.fileTable = fileTable;
+    }
+
     public ITLList<IValue> getOutput() {
         return output;
     }
@@ -73,16 +94,9 @@ public class ProgramState {
         return "ProgramState{" +
                 "executionStack=" + executionStack +
                 ", symbolTable=" + symbolTable +
+                ", heap=" + heap +
                 ", output=" + output +
                 ", originalStatement=" + originalStatement +
                 '}';
-    }
-
-    public ITLMap<StringValue, BufferedReader> getFileTable() {
-        return fileTable;
-    }
-
-    public void setFileTable(ITLMap<StringValue, BufferedReader> fileTable) {
-        this.fileTable = fileTable;
     }
 }

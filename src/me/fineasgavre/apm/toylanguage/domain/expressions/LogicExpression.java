@@ -1,5 +1,6 @@
 package me.fineasgavre.apm.toylanguage.domain.expressions;
 
+import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLHeap;
 import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
 import me.fineasgavre.apm.toylanguage.domain.expressions.interfaces.IExpression;
 import me.fineasgavre.apm.toylanguage.domain.types.BooleanType;
@@ -48,14 +49,14 @@ public class LogicExpression implements IExpression {
     }
 
     @Override
-    public IValue evaluate(ITLMap<String, IValue> symbolTable) throws TLException {
-        var value1 = this.expression1.evaluate(symbolTable);
+    public IValue evaluate(ITLMap<String, IValue> symbolTable, ITLHeap<IValue> heap) throws TLException {
+        var value1 = this.expression1.evaluate(symbolTable, heap);
 
         if (!value1.getType().equals(new BooleanType())) {
             throw new InvalidExpressionOperandTLException(new BooleanType(), value1.getType());
         }
 
-        var value2 = this.expression2.evaluate(symbolTable);
+        var value2 = this.expression2.evaluate(symbolTable, heap);
 
         if (!value2.getType().equals(new BooleanType())) {
             throw new InvalidExpressionOperandTLException(new BooleanType(), value2.getType());

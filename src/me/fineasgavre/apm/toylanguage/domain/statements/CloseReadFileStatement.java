@@ -22,9 +22,10 @@ public class CloseReadFileStatement implements IStatement {
     @Override
     public ProgramState execute(ProgramState programState) throws TLException {
         var symbolTable = programState.getSymbolTable();
+        var heap = programState.getHeap();
         var fileTable = programState.getFileTable();
 
-        var filePathValue = filePathExpression.evaluate(symbolTable);
+        var filePathValue = filePathExpression.evaluate(symbolTable, heap);
 
         if (!filePathValue.getType().equals(new StringType())) {
             throw new InvalidExpressionOperandTLException(new StringType(), filePathValue.getType());

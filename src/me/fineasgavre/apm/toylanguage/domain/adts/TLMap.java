@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TLMap<K, V> implements ITLMap<K, V> {
-    private final Map<K, V> map = new HashMap<>();
+    private Map<K, V> map = new HashMap<>();
 
     @Override
     public void put(K key, V value) {
@@ -43,6 +43,16 @@ public class TLMap<K, V> implements ITLMap<K, V> {
         }
 
         map.remove(key);
+    }
+
+    @Override
+    public Map<K, V> getMap() {
+        return map;
+    }
+
+    @Override
+    public void setMap(Map<K, V> map) {
+        this.map = map;
     }
 
     @Override

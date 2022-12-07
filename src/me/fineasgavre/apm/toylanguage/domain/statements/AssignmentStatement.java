@@ -19,12 +19,13 @@ public class AssignmentStatement implements IStatement {
     @Override
     public ProgramState execute(ProgramState programState) throws TLException {
         var symbolTable = programState.getSymbolTable();
+        var heap = programState.getHeap();
 
         if (!symbolTable.containsKey(this.variableId)) {
             throw new AssigmentToUndeclaredVariableTLException(this.variableId);
         }
 
-        var newValue = this.expression.evaluate(symbolTable);
+        var newValue = this.expression.evaluate(symbolTable, heap);
         var variableType = symbolTable.get(this.variableId).getType();
 
         if (!newValue.getType().equals(variableType)) {
