@@ -34,7 +34,7 @@ public class IfStatement implements IStatement {
         var unboxedValue = ((BooleanValue) value).getValue();
         executionStack.push(unboxedValue ? this.thenStatement : this.elseStatement);
 
-        return programState;
+        return null;
     }
 
     @Override

@@ -44,7 +44,7 @@ public class CloseReadFileStatement implements IStatement {
             throw new IOTLException();
         }
 
-        return programState;
+        return null;
     }
 
     @Override

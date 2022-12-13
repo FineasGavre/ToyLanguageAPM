@@ -15,4 +15,6 @@ public interface ITLMap<K, V> {
     Map<K, V> getMap();
 
     void setMap(Map<K, V> map);
+
+    ITLMap<K, V> clone();
 }

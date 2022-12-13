@@ -56,6 +56,14 @@ public class TLMap<K, V> implements ITLMap<K, V> {
     }
 
     @Override
+    public ITLMap<K, V> clone() {
+        var map = new TLMap<K, V>();
+        map.setMap(new HashMap<>(this.map));
+
+        return map;
+    }
+
+    @Override
     public String toString() {
         var stringBuilder = new StringBuilder();
         stringBuilder.append("TLMap (");

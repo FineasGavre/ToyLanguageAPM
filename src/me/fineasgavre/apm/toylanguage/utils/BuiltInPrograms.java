@@ -193,4 +193,35 @@ public class BuiltInPrograms {
                     )
             )
     );
+
+    public static IStatement PROGRAM10 = new CompoundStatement(
+            new VariableDeclarationStatement("v", new IntegerType()),
+            new CompoundStatement(
+                    new VariableDeclarationStatement("a", new RefType(new IntegerType())),
+                    new CompoundStatement(
+                            new AssignmentStatement("v", new ValueExpression(new IntegerValue(10))),
+                            new CompoundStatement(
+                                    new AllocateHeapStatement("a", new ValueExpression(new IntegerValue(22))),
+                                    new CompoundStatement(
+                                            new ForkStatement(
+                                                    new CompoundStatement(
+                                                            new WriteHeapStatement("a", new ValueExpression(new IntegerValue(30))),
+                                                            new CompoundStatement(
+                                                                    new AssignmentStatement("v", new ValueExpression(new IntegerValue(32))),
+                                                                    new CompoundStatement(
+                                                                            new PrintStatement(new VariableExpression("v")),
+                                                                            new PrintStatement(new ReadHeapExpression(new VariableExpression("a")))
+                                                                    )
+                                                            )
+                                                    )
+                                            ),
+                                            new CompoundStatement(
+                                                    new PrintStatement(new VariableExpression("v")),
+                                                    new PrintStatement(new ReadHeapExpression(new VariableExpression("a")))
+                                            )
+                                    )
+                            )
+                    )
+            )
+    );
 }

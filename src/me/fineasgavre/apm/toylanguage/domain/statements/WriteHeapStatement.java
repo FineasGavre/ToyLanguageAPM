@@ -37,7 +37,7 @@ public class WriteHeapStatement implements IStatement {
 
         heap.writeToAddress(refValue.getAddress(), value);
 
-        return programState;
+        return null;
     }
 
     @Override

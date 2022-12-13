@@ -8,24 +8,26 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SingleThreadProgramStateRepository implements IProgramStateRepository {
-    private ProgramState programState;
+public class ProgramStateRepository implements IProgramStateRepository {
+    private List<ProgramState> programStates = new ArrayList<>();
     private boolean isFirstFileLog = true;
 
     @Override
-    public ProgramState getCurrentProgramState() {
-        return this.programState;
+    public void addProgramState(ProgramState programState) {
+        this.programStates.add(programState);
     }
 
     @Override
-    public void setCurrentProgramState(ProgramState programState) {
-        this.programState = programState;
+    public List<ProgramState> getProgramStates() {
+        return programStates;
     }
 
     @Override
-    public boolean hasCurrentProgramState() {
-        return this.programState != null;
+    public void setProgramStates(List<ProgramState> programStates) {
+        this.programStates = programStates;
     }
 
     @Override
@@ -41,7 +43,7 @@ public class SingleThreadProgramStateRepository implements IProgramStateReposito
             }
 
             PrintWriter logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, true)));
-            logFile.write("\n\n== STATE LOG \n");
+            logFile.write("\n\n== (#" + programState.getId() + ") STATE LOG \n");
             logFile.write("ExeStack:\n" + programState.getExecutionStack());
             logFile.write("\n\nSymTable:\n" + programState.getSymbolTable());
             logFile.write("\n\nHeap:\n" + programState.getHeap());

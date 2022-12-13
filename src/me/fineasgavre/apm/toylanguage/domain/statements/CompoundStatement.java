@@ -19,7 +19,7 @@ public class CompoundStatement implements IStatement {
         executionStack.push(secondStatement);
         executionStack.push(firstStatement);
 
-        return programState;
+        return null;
     }
 
     @Override

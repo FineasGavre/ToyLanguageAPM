@@ -47,7 +47,7 @@ public class OpenReadFileStatement implements IStatement {
             throw new IOTLException();
         }
 
-        return programState;
+        return null;
     }
 
     @Override
