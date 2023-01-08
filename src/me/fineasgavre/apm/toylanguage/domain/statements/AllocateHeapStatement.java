@@ -36,7 +36,7 @@ public class AllocateHeapStatement implements IStatement {
         var newHeapEntry = heap.allocateNewForValue(newValue);
         symbolTable.put(this.variableId, new RefValue(newHeapEntry.getKey(), newHeapEntry.getValue().getType()));
 
-        return programState;
+        return null;
     }
 
     @Override

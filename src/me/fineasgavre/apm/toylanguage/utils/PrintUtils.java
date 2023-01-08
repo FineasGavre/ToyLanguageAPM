@@ -13,7 +13,7 @@ public class PrintUtils {
 
     public static void printProgramState(ProgramState programState, boolean printInitialStatement) {
         System.out.println();
-        PrintUtils.printHeadlineAndContent(ConsoleColors.CYAN_BACKGROUND + ConsoleColors.BLACK_BOLD, "   PROGRAM STATE   ", "", "");
+        PrintUtils.printHeadlineAndContent(ConsoleColors.CYAN_BACKGROUND + ConsoleColors.BLACK_BOLD, "   (#" + programState.getId() + ")PROGRAM STATE   ", "", "");
         PrintUtils.printHeadlineAndContent(ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.BLACK_BOLD_BRIGHT, "  EXECUTION STACK  ", ConsoleColors.YELLOW, programState.getExecutionStack().toString());
         PrintUtils.printHeadlineAndContent(ConsoleColors.PURPLE_BACKGROUND + ConsoleColors.BLACK_BOLD_BRIGHT, "   SYMBOL TABLE    ", ConsoleColors.PURPLE, programState.getSymbolTable().toString());
         PrintUtils.printHeadlineAndContent(ConsoleColors.PURPLE_BACKGROUND + ConsoleColors.BLACK_BOLD_BRIGHT, "   HEAP    ", ConsoleColors.PURPLE, programState.getHeap().toString());

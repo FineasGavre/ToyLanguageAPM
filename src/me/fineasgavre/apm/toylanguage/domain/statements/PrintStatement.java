@@ -21,7 +21,7 @@ public class PrintStatement implements IStatement {
         var value = this.expression.evaluate(symbolTable, heap);
         output.add(value);
 
-        return programState;
+        return null;
     }
 
     @Override

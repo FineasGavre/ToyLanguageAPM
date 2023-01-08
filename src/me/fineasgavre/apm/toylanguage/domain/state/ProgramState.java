@@ -11,17 +11,26 @@ import me.fineasgavre.apm.toylanguage.domain.adts.TLStack;
 import me.fineasgavre.apm.toylanguage.domain.statements.interfaces.IStatement;
 import me.fineasgavre.apm.toylanguage.domain.values.interfaces.IValue;
 import me.fineasgavre.apm.toylanguage.domain.values.StringValue;
+import me.fineasgavre.apm.toylanguage.exceptions.TLException;
+import me.fineasgavre.apm.toylanguage.exceptions.execution.EmptyExecutionStackTLException;
 
 import java.io.BufferedReader;
 
 public class ProgramState {
+    private static int nextId = 1;
+
+    private synchronized static int getNextId() {
+        return nextId++;
+    }
+
+    private final int id;
     private ITLStack<IStatement> executionStack;
     private ITLMap<String, IValue> symbolTable;
     private ITLHeap<IValue> heap;
     private ITLMap<StringValue, BufferedReader> fileTable;
     private ITLList<IValue> output;
 
-    private IStatement originalStatement;
+    private final IStatement originalStatement;
 
     public ProgramState(IStatement originalStatement) {
         this.executionStack = new TLStack<>();
@@ -29,6 +38,7 @@ public class ProgramState {
         this.heap = new TLHeap<>();
         this.fileTable = new TLMap<>();
         this.output = new TLList<>();
+        this.id = getNextId();
 
         this.originalStatement = originalStatement.clone();
         this.executionStack.push(originalStatement);
@@ -40,9 +50,18 @@ public class ProgramState {
         this.heap = heap;
         this.fileTable = fileTable;
         this.output = output;
+        this.id = getNextId();
 
         this.originalStatement = originalStatement.clone();
-        this.executionStack.push(originalStatement);
+    }
+
+    public ProgramState executeOneStep() throws TLException {
+        if (executionStack.isEmpty()) {
+            throw new EmptyExecutionStackTLException();
+        }
+
+        var currentStatement = executionStack.pop();
+        return currentStatement.execute(this);
     }
 
     public ITLStack<IStatement> getExecutionStack() {
@@ -87,6 +106,14 @@ public class ProgramState {
 
     public IStatement getOriginalStatement() {
         return originalStatement;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean isNotCompleted() {
+        return !executionStack.isEmpty();
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TLList<T> implements ITLList<T> {
-    private final List<T> list = new ArrayList<>();
+    private List<T> list = new ArrayList<>();
 
     @Override
     public void add(T element) {
@@ -34,6 +34,11 @@ public class TLList<T> implements ITLList<T> {
     }
 
     @Override
+    public void setList(List<T> list) {
+        this.list = list;
+    }
+
+    @Override
     public boolean hasValue(T value) {
         return list.contains(value);
     }
@@ -41,6 +46,14 @@ public class TLList<T> implements ITLList<T> {
     @Override
     public int size() {
         return list.size();
+    }
+
+    @Override
+    public ITLList<T> clone() {
+        var list = new TLList<T>();
+        list.setList(new ArrayList<>(this.list));
+
+        return list;
     }
 
     @Override
