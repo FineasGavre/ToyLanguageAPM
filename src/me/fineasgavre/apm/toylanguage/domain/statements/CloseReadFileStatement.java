@@ -1,9 +1,11 @@
 package me.fineasgavre.apm.toylanguage.domain.statements;
 
+import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
 import me.fineasgavre.apm.toylanguage.domain.expressions.interfaces.IExpression;
 import me.fineasgavre.apm.toylanguage.domain.state.ProgramState;
 import me.fineasgavre.apm.toylanguage.domain.statements.interfaces.IStatement;
 import me.fineasgavre.apm.toylanguage.domain.types.StringType;
+import me.fineasgavre.apm.toylanguage.domain.types.interfaces.IType;
 import me.fineasgavre.apm.toylanguage.domain.values.StringValue;
 import me.fineasgavre.apm.toylanguage.exceptions.execution.IOTLException;
 import me.fineasgavre.apm.toylanguage.exceptions.expression.InvalidExpressionOperandTLException;
@@ -45,6 +47,17 @@ public class CloseReadFileStatement implements IStatement {
         }
 
         return null;
+    }
+
+    @Override
+    public ITLMap<String, IType> staticTypeCheck(ITLMap<String, IType> typeEnvironment) throws TLException {
+        var expressionType = filePathExpression.staticTypeCheck(typeEnvironment);
+
+        if (!expressionType.equals(new StringType())) {
+            throw new InvalidExpressionOperandTLException(new StringType(), expressionType);
+        }
+
+        return typeEnvironment;
     }
 
     @Override

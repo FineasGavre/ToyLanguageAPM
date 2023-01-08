@@ -3,7 +3,9 @@ package me.fineasgavre.apm.toylanguage.domain.expressions;
 import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLHeap;
 import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
 import me.fineasgavre.apm.toylanguage.domain.expressions.interfaces.IExpression;
+import me.fineasgavre.apm.toylanguage.domain.types.interfaces.IType;
 import me.fineasgavre.apm.toylanguage.domain.values.interfaces.IValue;
+import me.fineasgavre.apm.toylanguage.exceptions.TLException;
 
 public class ValueExpression implements IExpression {
     private IValue value;
@@ -15,6 +17,11 @@ public class ValueExpression implements IExpression {
     @Override
     public IValue evaluate(ITLMap<String, IValue> symbolTable, ITLHeap<IValue> heap) {
         return value;
+    }
+
+    @Override
+    public IType staticTypeCheck(ITLMap<String, IType> typeEnvironment) throws TLException {
+        return value.getType();
     }
 
     @Override

@@ -3,7 +3,9 @@ package me.fineasgavre.apm.toylanguage.domain.expressions;
 import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLHeap;
 import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
 import me.fineasgavre.apm.toylanguage.domain.expressions.interfaces.IExpression;
+import me.fineasgavre.apm.toylanguage.domain.types.BooleanType;
 import me.fineasgavre.apm.toylanguage.domain.types.IntegerType;
+import me.fineasgavre.apm.toylanguage.domain.types.interfaces.IType;
 import me.fineasgavre.apm.toylanguage.domain.values.BooleanValue;
 import me.fineasgavre.apm.toylanguage.domain.values.IntegerValue;
 import me.fineasgavre.apm.toylanguage.domain.values.interfaces.IValue;
@@ -98,6 +100,22 @@ public class RelationalExpression implements IExpression {
                 return new BooleanValue(false);
             }
         }
+    }
+
+    @Override
+    public IType staticTypeCheck(ITLMap<String, IType> typeEnvironment) throws TLException {
+        var lhsType = expression1.staticTypeCheck(typeEnvironment);
+        var rhsType = expression2.staticTypeCheck(typeEnvironment);
+
+        if (!lhsType.equals(new IntegerType())) {
+            throw new InvalidExpressionOperandTLException(new IntegerType(), lhsType);
+        }
+
+        if (!rhsType.equals(new IntegerType())) {
+            throw new InvalidExpressionOperandTLException(new IntegerType(), rhsType);
+        }
+
+        return new BooleanType();
     }
 
     @Override

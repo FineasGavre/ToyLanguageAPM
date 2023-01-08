@@ -1,5 +1,6 @@
 package me.fineasgavre.apm.toylanguage.domain.statements;
 
+import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
 import me.fineasgavre.apm.toylanguage.domain.state.ProgramState;
 import me.fineasgavre.apm.toylanguage.domain.statements.interfaces.IStatement;
 import me.fineasgavre.apm.toylanguage.domain.types.interfaces.IType;
@@ -26,6 +27,12 @@ public class VariableDeclarationStatement implements IStatement {
         symbolTable.put(this.variableId, variableType.getInitialValue());
 
         return null;
+    }
+
+    @Override
+    public ITLMap<String, IType> staticTypeCheck(ITLMap<String, IType> typeEnvironment) throws TLException {
+        typeEnvironment.put(variableId, variableType);
+        return typeEnvironment;
     }
 
     @Override

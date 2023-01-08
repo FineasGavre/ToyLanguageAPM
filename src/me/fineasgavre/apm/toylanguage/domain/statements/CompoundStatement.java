@@ -1,7 +1,10 @@
 package me.fineasgavre.apm.toylanguage.domain.statements;
 
+import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
 import me.fineasgavre.apm.toylanguage.domain.state.ProgramState;
 import me.fineasgavre.apm.toylanguage.domain.statements.interfaces.IStatement;
+import me.fineasgavre.apm.toylanguage.domain.types.interfaces.IType;
+import me.fineasgavre.apm.toylanguage.exceptions.TLException;
 
 public class CompoundStatement implements IStatement {
     private IStatement firstStatement;
@@ -20,6 +23,11 @@ public class CompoundStatement implements IStatement {
         executionStack.push(firstStatement);
 
         return null;
+    }
+
+    @Override
+    public ITLMap<String, IType> staticTypeCheck(ITLMap<String, IType> typeEnvironment) throws TLException {
+        return secondStatement.staticTypeCheck(firstStatement.staticTypeCheck(typeEnvironment));
     }
 
     @Override

@@ -3,6 +3,7 @@ package me.fineasgavre.apm.toylanguage.domain.expressions;
 import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLHeap;
 import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
 import me.fineasgavre.apm.toylanguage.domain.expressions.interfaces.IExpression;
+import me.fineasgavre.apm.toylanguage.domain.types.interfaces.IType;
 import me.fineasgavre.apm.toylanguage.domain.values.interfaces.IValue;
 import me.fineasgavre.apm.toylanguage.exceptions.expression.UnknownVariableInExpressionTLException;
 import me.fineasgavre.apm.toylanguage.exceptions.TLException;
@@ -21,6 +22,11 @@ public class VariableExpression implements IExpression {
         }
 
         return symbolTable.get(this.variableId);
+    }
+
+    @Override
+    public IType staticTypeCheck(ITLMap<String, IType> typeEnvironment) throws TLException {
+        return typeEnvironment.get(this.variableId);
     }
 
     @Override

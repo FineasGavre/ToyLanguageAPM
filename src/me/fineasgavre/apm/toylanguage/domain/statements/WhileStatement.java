@@ -1,9 +1,11 @@
 package me.fineasgavre.apm.toylanguage.domain.statements;
 
+import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
 import me.fineasgavre.apm.toylanguage.domain.expressions.interfaces.IExpression;
 import me.fineasgavre.apm.toylanguage.domain.state.ProgramState;
 import me.fineasgavre.apm.toylanguage.domain.statements.interfaces.IStatement;
 import me.fineasgavre.apm.toylanguage.domain.types.BooleanType;
+import me.fineasgavre.apm.toylanguage.domain.types.interfaces.IType;
 import me.fineasgavre.apm.toylanguage.domain.values.BooleanValue;
 import me.fineasgavre.apm.toylanguage.exceptions.TLException;
 import me.fineasgavre.apm.toylanguage.exceptions.expression.InvalidExpressionOperandTLException;
@@ -36,6 +38,18 @@ public class WhileStatement implements IStatement {
         }
 
         return null;
+    }
+
+    @Override
+    public ITLMap<String, IType> staticTypeCheck(ITLMap<String, IType> typeEnvironment) throws TLException {
+        var expressionType = expression.staticTypeCheck(typeEnvironment);
+
+        if (!expressionType.equals(new BooleanType())) {
+            throw new InvalidExpressionOperandTLException(new BooleanType(), expressionType);
+        }
+
+        statement.staticTypeCheck(typeEnvironment);
+        return typeEnvironment;
     }
 
     @Override
