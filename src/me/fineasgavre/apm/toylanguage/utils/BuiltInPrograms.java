@@ -172,7 +172,7 @@ public class BuiltInPrograms {
     public static IStatement PROGRAM9 = new CompoundStatement(
             new VariableDeclarationStatement("v", new IntegerType()),
             new CompoundStatement(
-                    new AssignmentStatement("v", new ValueExpression(new BooleanValue(false))),
+                    new AssignmentStatement("v", new ValueExpression(new IntegerValue(10))),
                     new CompoundStatement(
                             new WhileStatement(
                                     new RelationalExpression(
@@ -205,7 +205,7 @@ public class BuiltInPrograms {
                                     new CompoundStatement(
                                             new ForkStatement(
                                                     new CompoundStatement(
-                                                            new WriteHeapStatement("a123", new ValueExpression(new IntegerValue(30))),
+                                                            new WriteHeapStatement("a", new ValueExpression(new IntegerValue(30))),
                                                             new CompoundStatement(
                                                                     new AssignmentStatement("v", new ValueExpression(new IntegerValue(32))),
                                                                     new CompoundStatement(
