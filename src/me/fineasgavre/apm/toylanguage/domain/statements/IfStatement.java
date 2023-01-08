@@ -1,10 +1,13 @@
 package me.fineasgavre.apm.toylanguage.domain.statements;
 
+import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
 import me.fineasgavre.apm.toylanguage.domain.expressions.interfaces.IExpression;
 import me.fineasgavre.apm.toylanguage.domain.state.ProgramState;
 import me.fineasgavre.apm.toylanguage.domain.statements.interfaces.IStatement;
 import me.fineasgavre.apm.toylanguage.domain.types.BooleanType;
+import me.fineasgavre.apm.toylanguage.domain.types.interfaces.IType;
 import me.fineasgavre.apm.toylanguage.domain.values.BooleanValue;
+import me.fineasgavre.apm.toylanguage.exceptions.expression.InvalidExpressionOperandTLException;
 import me.fineasgavre.apm.toylanguage.exceptions.statement.InvalidTypeStatementTLException;
 import me.fineasgavre.apm.toylanguage.exceptions.TLException;
 
@@ -35,6 +38,20 @@ public class IfStatement implements IStatement {
         executionStack.push(unboxedValue ? this.thenStatement : this.elseStatement);
 
         return null;
+    }
+
+    @Override
+    public ITLMap<String, IType> staticTypeCheck(ITLMap<String, IType> typeEnvironment) throws TLException {
+        var expressionType = conditionExpression.staticTypeCheck(typeEnvironment);
+
+        if (!expressionType.equals(new BooleanType())) {
+            throw new InvalidExpressionOperandTLException(new BooleanType(), expressionType);
+        }
+
+        thenStatement.staticTypeCheck(typeEnvironment.clone());
+        elseStatement.staticTypeCheck(typeEnvironment.clone());
+
+        return typeEnvironment;
     }
 
     @Override

@@ -4,6 +4,7 @@ import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLHeap;
 import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
 import me.fineasgavre.apm.toylanguage.domain.expressions.interfaces.IExpression;
 import me.fineasgavre.apm.toylanguage.domain.types.IntegerType;
+import me.fineasgavre.apm.toylanguage.domain.types.interfaces.IType;
 import me.fineasgavre.apm.toylanguage.domain.values.IntegerValue;
 import me.fineasgavre.apm.toylanguage.domain.values.interfaces.IValue;
 import me.fineasgavre.apm.toylanguage.exceptions.arithmetic.DivisionByZeroArithmeticTLException;
@@ -87,6 +88,22 @@ public class ArithmeticExpression implements IExpression {
                 return new IntegerValue(0);
             }
         }
+    }
+
+    @Override
+    public IType staticTypeCheck(ITLMap<String, IType> typeEnvironment) throws TLException {
+        var lhsType = expression1.staticTypeCheck(typeEnvironment);
+        var rhsType = expression2.staticTypeCheck(typeEnvironment);
+
+        if (!lhsType.equals(new IntegerType())) {
+            throw new InvalidExpressionOperandTLException(new IntegerType(), lhsType);
+        }
+
+        if (!rhsType.equals(new IntegerType())) {
+            throw new InvalidExpressionOperandTLException(new IntegerType(), rhsType);
+        }
+
+        return new IntegerType();
     }
 
     @Override

@@ -1,9 +1,12 @@
 package me.fineasgavre.apm.toylanguage.domain.statements;
 
+import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
 import me.fineasgavre.apm.toylanguage.domain.expressions.interfaces.IExpression;
 import me.fineasgavre.apm.toylanguage.domain.state.ProgramState;
 import me.fineasgavre.apm.toylanguage.domain.statements.interfaces.IStatement;
+import me.fineasgavre.apm.toylanguage.domain.types.IntegerType;
 import me.fineasgavre.apm.toylanguage.domain.types.StringType;
+import me.fineasgavre.apm.toylanguage.domain.types.interfaces.IType;
 import me.fineasgavre.apm.toylanguage.domain.values.IntegerValue;
 import me.fineasgavre.apm.toylanguage.domain.values.StringValue;
 import me.fineasgavre.apm.toylanguage.exceptions.expression.InvalidExpressionOperandTLException;
@@ -47,6 +50,22 @@ public class ReadFileStatement implements IStatement {
 
         symbolTable.put(variableName, new IntegerValue(fileValue));
         return null;
+    }
+
+    @Override
+    public ITLMap<String, IType> staticTypeCheck(ITLMap<String, IType> typeEnvironment) throws TLException {
+        var variableType = typeEnvironment.get(variableName);
+        var expressionType = filePathExpression.staticTypeCheck(typeEnvironment);
+
+        if (!expressionType.equals(new StringType())) {
+            throw new InvalidExpressionOperandTLException(new StringType(), expressionType);
+        }
+
+        if (!variableType.equals(new IntegerType())) {
+            throw new InvalidExpressionOperandTLException(new IntegerType(), expressionType);
+        }
+
+        return typeEnvironment;
     }
 
     @Override

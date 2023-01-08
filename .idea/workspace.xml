@@ -4,27 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="24b7e68d-5d00-4224-917f-b3f3e4902261" name="Changes" comment="add: ProgramState with executionStack / symbolTable / output &amp; default constructor / getters/setters">
-      <change afterPath="$PROJECT_DIR$/runDir/test.in" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Expressions/RelationalExpression.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Statements/CloseReadFileStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Statements/OpenReadFileStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Statements/ReadFileStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Types/StringType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Values/StringValue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Exceptions/Execution/IOTLException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Exceptions/File/FileAlreadyOpenedException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Exceptions/File/FileNotOpenedException.java" afterDir="false" />
+    <list default="true" id="24b7e68d-5d00-4224-917f-b3f3e4902261" name="Changes" comment="add: fork statement">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Controller/ProgramStateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Controller/ProgramStateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/ADTs/Interfaces/ITLMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/ADTs/Interfaces/ITLMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/ADTs/TLMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/ADTs/TLMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Expressions/LogicExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/Expressions/LogicExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/State/ProgramState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Domain/State/ProgramState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Repository/Interfaces/IProgramStateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Repository/Interfaces/IProgramStateRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Repository/SingleThreadProgramStateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Repository/SingleThreadProgramStateRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Utils/BuiltInPrograms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Utils/BuiltInPrograms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/expressions/ArithmeticExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/expressions/ArithmeticExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/expressions/LogicExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/expressions/LogicExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/expressions/ReadHeapExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/expressions/ReadHeapExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/expressions/RelationalExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/expressions/RelationalExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/expressions/ValueExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/expressions/ValueExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/expressions/VariableExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/expressions/VariableExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/expressions/interfaces/IExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/expressions/interfaces/IExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/AllocateHeapStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/AllocateHeapStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/AssignmentStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/AssignmentStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/CloseReadFileStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/CloseReadFileStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/CompoundStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/CompoundStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/ForkStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/ForkStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/IfStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/IfStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/NoopStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/NoopStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/OpenReadFileStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/OpenReadFileStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/PrintStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/PrintStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/ReadFileStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/ReadFileStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/VariableDeclarationStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/VariableDeclarationStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/WhileStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/WhileStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/WriteHeapStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/WriteHeapStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/interfaces/IStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/domain/statements/interfaces/IStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/utils/BuiltInPrograms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/me/fineasgavre/apm/toylanguage/utils/BuiltInPrograms.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +46,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="A2" />
+        <entry key="$PROJECT_DIR$" value="A5" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -57,21 +61,22 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/fineasgavre/Desktop/University Work/Year 4/Semester 7/Advanced Programming Methods (Retake)/Labs/ToyLanguageAPM",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/fineasgavre/Desktop/University Work/Year 4/Semester 7/Advanced Programming Methods (Retake)/Labs/ToyLanguageAPM&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RunManager" selected="Application.me.fineasgavre.apm.toylanguage.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="ToyLanguageAPM" />
@@ -80,8 +85,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="me.fineasgavre.apm.toylanguage.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="me.fineasgavre.apm.toylanguage.Main" />
+      <module name="ToyLanguageAPM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="me.fineasgavre.apm.toylanguage.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.me.fineasgavre.apm.toylanguage.Main" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -99,6 +118,8 @@
       <workItem from="1666105590945" duration="1225000" />
       <workItem from="1666711294581" duration="551000" />
       <workItem from="1667906698214" duration="2694000" />
+      <workItem from="1670941617907" duration="7307000" />
+      <workItem from="1671552341950" duration="1388000" />
     </task>
     <task id="LOCAL-00001" summary="add: IStatement, IType, IValue interfaces">
       <created>1664914084130</created>
@@ -114,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664914124447</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add: fork statement">
+      <created>1670945650902</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670945650902</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,6 +162,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add: IStatement, IType, IValue interfaces" />
     <MESSAGE value="add: ProgramState with executionStack / symbolTable / output &amp; default constructor / getters/setters" />
-    <option name="LAST_COMMIT_MESSAGE" value="add: ProgramState with executionStack / symbolTable / output &amp; default constructor / getters/setters" />
+    <MESSAGE value="add: fork statement" />
+    <option name="LAST_COMMIT_MESSAGE" value="add: fork statement" />
   </component>
 </project>

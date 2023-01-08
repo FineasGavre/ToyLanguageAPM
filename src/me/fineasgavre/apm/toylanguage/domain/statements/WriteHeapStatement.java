@@ -1,11 +1,14 @@
 package me.fineasgavre.apm.toylanguage.domain.statements;
 
+import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
 import me.fineasgavre.apm.toylanguage.domain.expressions.interfaces.IExpression;
 import me.fineasgavre.apm.toylanguage.domain.state.ProgramState;
 import me.fineasgavre.apm.toylanguage.domain.statements.interfaces.IStatement;
 import me.fineasgavre.apm.toylanguage.domain.types.RefType;
+import me.fineasgavre.apm.toylanguage.domain.types.interfaces.IType;
 import me.fineasgavre.apm.toylanguage.domain.values.RefValue;
 import me.fineasgavre.apm.toylanguage.exceptions.TLException;
+import me.fineasgavre.apm.toylanguage.exceptions.expression.InvalidExpressionOperandTLException;
 import me.fineasgavre.apm.toylanguage.exceptions.expression.UnknownVariableInExpressionTLException;
 import me.fineasgavre.apm.toylanguage.exceptions.heap.IncompatibleTypeForHeapAllocationTLException;
 
@@ -38,6 +41,18 @@ public class WriteHeapStatement implements IStatement {
         heap.writeToAddress(refValue.getAddress(), value);
 
         return null;
+    }
+
+    @Override
+    public ITLMap<String, IType> staticTypeCheck(ITLMap<String, IType> typeEnvironment) throws TLException {
+        var variableType = typeEnvironment.get(variableId);
+        var expressionType = expression.staticTypeCheck(typeEnvironment);
+
+        if (!variableType.equals(new RefType(expressionType))) {
+            throw new InvalidExpressionOperandTLException(new RefType(expressionType), variableType);
+        }
+
+        return typeEnvironment;
     }
 
     @Override

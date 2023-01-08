@@ -4,9 +4,11 @@ import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLHeap;
 import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
 import me.fineasgavre.apm.toylanguage.domain.expressions.interfaces.IExpression;
 import me.fineasgavre.apm.toylanguage.domain.types.RefType;
+import me.fineasgavre.apm.toylanguage.domain.types.interfaces.IType;
 import me.fineasgavre.apm.toylanguage.domain.values.RefValue;
 import me.fineasgavre.apm.toylanguage.domain.values.interfaces.IValue;
 import me.fineasgavre.apm.toylanguage.exceptions.TLException;
+import me.fineasgavre.apm.toylanguage.exceptions.heap.IncompatibleTypeForHeapAllocationTLException;
 import me.fineasgavre.apm.toylanguage.exceptions.heap.InvalidHeapAccessTLException;
 
 public class ReadHeapExpression implements IExpression {
@@ -31,6 +33,17 @@ public class ReadHeapExpression implements IExpression {
         }
 
         return heap.getValueForAddress(unboxedValue.getAddress());
+    }
+
+    @Override
+    public IType staticTypeCheck(ITLMap<String, IType> typeEnvironment) throws TLException {
+        var type = expression.staticTypeCheck(typeEnvironment);
+
+        if (!(type instanceof RefType)) {
+            throw new InvalidHeapAccessTLException();
+        }
+
+        return ((RefType) type).getReferencedType();
     }
 
     @Override

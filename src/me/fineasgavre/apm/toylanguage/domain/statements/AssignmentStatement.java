@@ -1,8 +1,11 @@
 package me.fineasgavre.apm.toylanguage.domain.statements;
 
+import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
 import me.fineasgavre.apm.toylanguage.domain.expressions.interfaces.IExpression;
 import me.fineasgavre.apm.toylanguage.domain.state.ProgramState;
 import me.fineasgavre.apm.toylanguage.domain.statements.interfaces.IStatement;
+import me.fineasgavre.apm.toylanguage.domain.types.interfaces.IType;
+import me.fineasgavre.apm.toylanguage.exceptions.expression.InvalidExpressionOperandTLException;
 import me.fineasgavre.apm.toylanguage.exceptions.statement.AssigmentToUndeclaredVariableTLException;
 import me.fineasgavre.apm.toylanguage.exceptions.statement.AssignmentToDifferentVariableTypeTLException;
 import me.fineasgavre.apm.toylanguage.exceptions.TLException;
@@ -34,6 +37,18 @@ public class AssignmentStatement implements IStatement {
 
         symbolTable.put(this.variableId, newValue);
         return null;
+    }
+
+    @Override
+    public ITLMap<String, IType> staticTypeCheck(ITLMap<String, IType> typeEnvironment) throws TLException {
+        var variableType = typeEnvironment.get(variableId);
+        var expressionType = expression.staticTypeCheck(typeEnvironment);
+
+        if (!variableType.equals(expressionType)) {
+            throw new InvalidExpressionOperandTLException(variableType, expressionType);
+        }
+
+        return typeEnvironment;
     }
 
     @Override
