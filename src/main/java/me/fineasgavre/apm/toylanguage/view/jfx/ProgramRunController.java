@@ -84,7 +84,6 @@ public class ProgramRunController {
     private void setupProgramStateIdSelection() {
         programStates.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue == null) {
-                selectedProgramStateId = null;
                 clearSpecificProgramState();
                 return;
             }
@@ -115,15 +114,7 @@ public class ProgramRunController {
 
         if (selectedProgramStateId != null) {
             var selectedProgramState = snapshot.getProgramStateSnapshots().stream().filter(e -> e.getProgramStateId() == selectedProgramStateId).findFirst();
-            if (selectedProgramState.isPresent()) {
-                for (int i = 0; i < programStates.getItems().size(); i++) {
-                    if (programStates.getItems().get(i).equals(selectedProgramStateId.toString())) {
-                        programStates.getSelectionModel().select(i);
-                    }
-                }
-
-                updateSpecificProgramState(selectedProgramState.get());
-            }
+            selectedProgramState.ifPresent(this::updateSpecificProgramState);
         } else {
             clearSpecificProgramState();
         }
@@ -162,6 +153,18 @@ public class ProgramRunController {
 
         executionStack.getItems().addAll(programStateSnapshot.getExecutionStackSnapshot());
         symbolTable.getItems().addAll(programStateSnapshot.getSymbolTableSnapshot());
+    }
+
+    private void reselectProgramState() {
+        if (selectedProgramStateId == null) {
+            return;
+        }
+
+        for (int i = 0; i < programStates.getItems().size(); i++) {
+            if (programStates.getItems().get(i).equals(selectedProgramStateId.toString())) {
+                programStates.getSelectionModel().clearAndSelect(i);
+            }
+        }
     }
 
     private void clearSpecificProgramState() {
