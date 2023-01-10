@@ -20,7 +20,7 @@
                   <VBox fillWidth="false" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label text="Number of Program States" />
-                        <TextField editable="false" />
+                        <TextField fx:id="numberOfProgramStates" editable="false" />
                      </children>
                   </VBox>
                </children>
@@ -30,10 +30,10 @@
                   <VBox HBox.hgrow="ALWAYS">
                      <children>
                         <Label text="Heap" />
-                        <TableView>
+                        <TableView fx:id="heapTable">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="Address" />
-                              <TableColumn prefWidth="75.0" text="Value" />
+                              <TableColumn fx:id="heapTableAddressColumn" prefWidth="75.0" text="Address" />
+                              <TableColumn fx:id="heapTableValueColumn" prefWidth="75.0" text="Value" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -44,13 +44,13 @@
                   <VBox HBox.hgrow="ALWAYS">
                      <children>
                         <Label text="Output" />
-                        <ListView />
+                        <ListView fx:id="outputTable" />
                      </children>
                   </VBox>
                   <VBox HBox.hgrow="ALWAYS">
                      <children>
                         <Label text="File Table" />
-                        <ListView />
+                        <ListView fx:id="fileTable" />
                      </children>
                   </VBox>
                </children>
@@ -63,22 +63,22 @@
                   <VBox HBox.hgrow="ALWAYS">
                      <children>
                         <Label text="Progam States" />
-                        <ListView VBox.vgrow="ALWAYS" />
+                        <ListView fx:id="programStates" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                   <VBox HBox.hgrow="ALWAYS">
                      <children>
                         <Label text="Execution Stack" />
-                        <ListView />
+                        <ListView fx:id="executionStack" />
                      </children>
                   </VBox>
                   <VBox HBox.hgrow="ALWAYS">
                      <children>
                         <Label text="Symbol Table" />
-                        <TableView mouseTransparent="true" prefHeight="200.0">
+                        <TableView fx:id="symbolTable" mouseTransparent="true" prefHeight="200.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="ID" />
-                              <TableColumn prefWidth="75.0" text="Value" />
+                              <TableColumn fx:id="symbolTableIdColumn" prefWidth="75.0" text="ID" />
+                              <TableColumn fx:id="symbolTableValueColumn" prefWidth="75.0" text="Value" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -92,7 +92,7 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button mnemonicParsing="false" text="Execute One Step" VBox.vgrow="ALWAYS">
+                        <Button fx:id="executeStepButton" mnemonicParsing="false" onAction="#executeOneStep" text="Execute One Step" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>

@@ -1,30 +1,71 @@
 package me.fineasgavre.apm.toylanguage.view.jfx;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import me.fineasgavre.apm.toylanguage.controller.ProgramStateController;
-import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLHeap;
-import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLList;
-import me.fineasgavre.apm.toylanguage.domain.values.interfaces.IValue;
-import me.fineasgavre.apm.toylanguage.view.jfx.models.HeapItem;
+import me.fineasgavre.apm.toylanguage.domain.state.snapshot.ExecutionStateSnapshot;
+import me.fineasgavre.apm.toylanguage.domain.state.snapshot.PairItem;
+import me.fineasgavre.apm.toylanguage.domain.state.snapshot.ProgramStateSnapshot;
 import me.fineasgavre.apm.toylanguage.view.jfx.models.LoadedProgram;
-import me.fineasgavre.apm.toylanguage.view.jfx.models.OutputItem;
+
+import java.util.List;
 
 public class ProgramRunController {
     @FXML
-    private TableView heapTable;
+    private TextField numberOfProgramStates;
 
     @FXML
-    private TableView outputTable;
+    private TableView<PairItem<String>> heapTable;
+
+    @FXML
+    private TableColumn<PairItem<String>, String> heapTableAddressColumn;
+
+    @FXML
+    private TableColumn<PairItem<String>, String> heapTableValueColumn;
+
+    @FXML
+    private ListView<String> outputTable;
+
+    @FXML
+    private ListView<String> fileTable;
+
+    @FXML
+    private ListView<String> programStates;
+
+    @FXML
+    private ListView<String> executionStack;
+
+    @FXML
+    private TableView<PairItem<String>> symbolTable;
+
+    @FXML
+    private TableColumn<PairItem<String>, String> symbolTableIdColumn;
+
+    @FXML
+    private TableColumn<PairItem<String>, String> symbolTableValueColumn;
 
     @FXML
     private Button executeStepButton;
 
     private LoadedProgram program;
     private ProgramStateController programStateController = new ProgramStateController();
+
+    private ExecutionStateSnapshot latestExecutionStateSnapshot = null;
+    private Integer selectedProgramStateId = null;
+
+    @FXML
+    private void initialize() {
+        heapTableAddressColumn.setCellValueFactory(new PropertyValueFactory<>("first"));
+        heapTableValueColumn.setCellValueFactory(new PropertyValueFactory<>("second"));
+        symbolTableIdColumn.setCellValueFactory(new PropertyValueFactory<>("first"));
+        symbolTableValueColumn.setCellValueFactory(new PropertyValueFactory<>("second"));
+
+        updateProgramCount(0);
+        setupProgramStateIdSelection();
+    }
 
     public void setProgram(LoadedProgram program) {
         this.program = program;
@@ -35,12 +76,30 @@ public class ProgramRunController {
 
     @FXML
     private void executeOneStep() {
-        programStateController.oneStepForAllProgramStatesWithGarbageCollection();
+        var snapshot = programStateController.oneStepForAllProgramStatesWithGarbageCollection();
 
-        updateState();
+        updateState(snapshot);
     }
 
-    private void updateState() {
+    private void setupProgramStateIdSelection() {
+        programStates.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue == null) {
+                selectedProgramStateId = null;
+                clearSpecificProgramState();
+                return;
+            }
+
+            var newProgramStateId = Integer.parseInt(newValue);
+
+            if (selectedProgramStateId == null || newProgramStateId != selectedProgramStateId) {
+                selectedProgramStateId = newProgramStateId;
+                updateState(latestExecutionStateSnapshot);
+            }
+        });
+    }
+
+    private void updateState(ExecutionStateSnapshot snapshot) {
+        latestExecutionStateSnapshot = snapshot;
         var isProgramStatesEmpty = !programStateController.hasRunnableProgramStates();
 
         if (isProgramStatesEmpty) {
@@ -48,42 +107,65 @@ public class ProgramRunController {
             return;
         }
 
-        var heapTable = programStateController.getProgramStates().stream().findFirst().get().getHeap();
-        updateHeapTable(heapTable);
+        updateProgramCount(snapshot.getProgramStateSnapshots().size());
+        updateHeapTable(snapshot.getHeapSnapshot());
+        updateOutputTable(snapshot.getOutputSnapshot());
+        updateFileTable(snapshot.getFileTableSnapshot());
+        updateProgramStates(snapshot.getProgramStateSnapshots().stream().map(e -> Integer.toString(e.getProgramStateId())).toList());
 
-        var outputTable = programStateController.getProgramStates().stream().findFirst().get().getOutput();
-        updateOutputTable(outputTable);
+        if (selectedProgramStateId != null) {
+            var selectedProgramState = snapshot.getProgramStateSnapshots().stream().filter(e -> e.getProgramStateId() == selectedProgramStateId).findFirst();
+            if (selectedProgramState.isPresent()) {
+                for (int i = 0; i < programStates.getItems().size(); i++) {
+                    if (programStates.getItems().get(i).equals(selectedProgramStateId.toString())) {
+                        programStates.getSelectionModel().select(i);
+                    }
+                }
+
+                updateSpecificProgramState(selectedProgramState.get());
+            }
+        } else {
+            clearSpecificProgramState();
+        }
     }
 
-    private void updateHeapTable(ITLHeap<IValue> heap) {
+    private void updateProgramCount(int programCount) {
+        numberOfProgramStates.setText(Integer.toString(programCount));
+    }
+
+    private void updateHeapTable(List<PairItem<String>> heapSnapshot) {
         heapTable.getItems().clear();
-        heapTable.getColumns().clear();
-
-        var addressColumn = new TableColumn<HeapItem, String>("Address");
-        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
-
-        var valueColumn = new TableColumn<HeapItem, String>("Value");
-        valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
-
-        var typeColumn = new TableColumn<HeapItem, String>("Type");
-        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-
-        heapTable.getColumns().addAll(addressColumn, valueColumn, typeColumn);
-
-        var items = heap.getContent().getMap().entrySet().stream().map(e -> new HeapItem(e.getKey().toString(), e.getValue().toString(), e.getValue().getType().toString())).toList();
-        heapTable.getItems().addAll(items);
+        heapTable.getItems().addAll(heapSnapshot);
     }
 
-    private void updateOutputTable(ITLList<IValue> output) {
+    private void updateOutputTable(List<String> outputSnapshot) {
         outputTable.getItems().clear();
-        outputTable.getColumns().clear();
+        outputTable.getItems().addAll(outputSnapshot);
+    }
 
-        var valueColumn = new TableColumn<OutputItem, String>("Value");
-        valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
+    private void updateFileTable(List<String> fileTableSnapshot) {
+        fileTable.getItems().clear();
+        fileTable.getItems().addAll(fileTableSnapshot);
+    }
 
-        outputTable.getColumns().add(valueColumn);
+    private void updateProgramStates(List<String> programStateIds) {
+        programStates.getItems().clear();
+        programStates.getItems().addAll(programStateIds);
 
-        var items = output.getList().stream().map(e -> new OutputItem(e.toString())).toList();
-        outputTable.getItems().addAll(items);
+        if (selectedProgramStateId != null) {
+            programStates.getSelectionModel().select(selectedProgramStateId.toString());
+        }
+    }
+
+    private void updateSpecificProgramState(ProgramStateSnapshot programStateSnapshot) {
+        clearSpecificProgramState();
+
+        executionStack.getItems().addAll(programStateSnapshot.getExecutionStackSnapshot());
+        symbolTable.getItems().addAll(programStateSnapshot.getSymbolTableSnapshot());
+    }
+
+    private void clearSpecificProgramState() {
+        executionStack.getItems().clear();
+        symbolTable.getItems().clear();
     }
 }

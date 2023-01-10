@@ -29,6 +29,11 @@ public class TLStack<T> implements ITLStack<T> {
     }
 
     @Override
+    public Stack<T> getStack() {
+        return stack;
+    }
+
+    @Override
     public String toString() {
         var stringBuilder = new StringBuilder();
         stringBuilder.append("TLStack (");
