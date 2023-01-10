@@ -97,7 +97,7 @@
                               <Insets />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" text="Exit Execution Environment" />
+                        <Button disable="true" mnemonicParsing="false" text="Exit Execution Environment" />
                      </children>
                      <HBox.margin>
                         <Insets bottom="20.0" top="20.0" />
