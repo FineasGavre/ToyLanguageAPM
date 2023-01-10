@@ -5,6 +5,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import me.fineasgavre.apm.toylanguage.controller.ProgramStateController;
 import me.fineasgavre.apm.toylanguage.domain.state.snapshot.ExecutionStateSnapshot;
 import me.fineasgavre.apm.toylanguage.domain.state.snapshot.PairItem;
@@ -81,6 +82,12 @@ public class ProgramRunController {
         updateState(snapshot);
     }
 
+    @FXML
+    private void closeWindow() {
+        var stage = (Stage) executeStepButton.getScene().getWindow();
+        stage.close();
+    }
+
     private void setupProgramStateIdSelection() {
         programStates.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue == null) {
@@ -142,9 +149,7 @@ public class ProgramRunController {
         programStates.getItems().clear();
         programStates.getItems().addAll(programStateIds);
 
-        if (selectedProgramStateId != null) {
-            programStates.getSelectionModel().select(selectedProgramStateId.toString());
-        }
+        reselectProgramState();
     }
 
     private void updateSpecificProgramState(ProgramStateSnapshot programStateSnapshot) {
