@@ -19,10 +19,8 @@ import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ProgramListController {
-    private Stage stage;
-
     @FXML
-    protected TableView programList;
+    protected TableView<LoadedProgram> programList;
 
     @FXML
     protected Button startButton;
@@ -41,7 +39,10 @@ public class ProgramListController {
         var column2 = new TableColumn<LoadedProgram, String>("Program Code");
         column2.setCellValueFactory(new PropertyValueFactory<>("programCode"));
 
-        programList.getColumns().addAll(column1, column2);
+        var column3 = new TableColumn<LoadedProgram, String>("Type Check");
+        column3.setCellValueFactory(new PropertyValueFactory<>("typeCheckResultAsString"));
+
+        programList.getColumns().addAll(column1, column2, column3);
     }
 
     private void setupTableData() {
@@ -53,7 +54,7 @@ public class ProgramListController {
     }
 
     private void setupTableSelectionListener() {
-        programList.getSelectionModel().getSelectedItems().addListener((ListChangeListener) change -> startButton.setDisable(change.getList().isEmpty()));
+        programList.getSelectionModel().getSelectedItems().addListener((ListChangeListener<LoadedProgram>) change -> startButton.setDisable(change.getList().filtered(LoadedProgram::getTypeCheckResult).isEmpty()));
     }
 
     @FXML
@@ -71,6 +72,7 @@ public class ProgramListController {
         var controller = (ProgramRunController) fxmlLoader.getController();
         controller.setProgram(loadedProgram);
 
+        var stage = new Stage();
         var scene = new Scene(root);
         stage.setTitle("Running Program " + loadedProgram.getProgramId());
         stage.setScene(scene);
@@ -79,9 +81,5 @@ public class ProgramListController {
 
     private LoadedProgram mapStatementToProgram(String id, IStatement program) {
         return new LoadedProgram(id, program.toString(), program);
-    }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
     }
 }
