@@ -103,7 +103,6 @@ public class ProgramRunController {
 
         if (isProgramStatesEmpty) {
             executeStepButton.setDisable(true);
-            return;
         }
 
         updateProgramCount(snapshot.getProgramStateSnapshots().size());
