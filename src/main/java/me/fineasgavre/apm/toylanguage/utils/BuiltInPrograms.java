@@ -228,5 +228,106 @@ public class BuiltInPrograms {
             )
     );
 
-    public static List<IStatement> programList = new ArrayList<>(List.of(PROGRAM1, PROGRAM2, PROGRAM3, PROGRAM4, PROGRAM5, PROGRAM6, PROGRAM7, PROGRAM8, PROGRAM9, PROGRAM10));
+    public static IStatement PROGRAM11 = new GroupStatement(
+            new VariableDeclarationStatement("a", new IntegerType()),
+            new AssignmentStatement("a", new ValueExpression(new IntegerValue(1))),
+            new VariableDeclarationStatement("b", new IntegerType()),
+            new AssignmentStatement("b", new ValueExpression(new IntegerValue(2))),
+            new VariableDeclarationStatement("c", new IntegerType()),
+            new AssignmentStatement("c", new ValueExpression(new IntegerValue(5))),
+            new SwitchStatement(
+                    new ArithmeticExpression(new VariableExpression("a"), new ValueExpression(new IntegerValue(10)), ArithmeticExpression.ArithmeticOperation.MULTIPLICATION),
+                    new ArithmeticExpression(new VariableExpression("b"), new VariableExpression("c"), ArithmeticExpression.ArithmeticOperation.MULTIPLICATION),
+                    new GroupStatement(
+                            new PrintStatement(new VariableExpression("a")),
+                            new PrintStatement(new VariableExpression("b"))
+                    ),
+                    new ValueExpression(new IntegerValue(10)),
+                    new GroupStatement(
+                            new PrintStatement(new ValueExpression(new IntegerValue(100))),
+                            new PrintStatement(new ValueExpression(new IntegerValue(200)))
+                    ),
+                    new PrintStatement(new ValueExpression(new IntegerValue(300)))
+            ),
+            new PrintStatement(new ValueExpression(new IntegerValue(300)))
+    );
+
+    public static IStatement PROGRAM12 = new GroupStatement(
+            new VariableDeclarationStatement("v", new IntegerType()),
+            new AssignmentStatement("v", new ValueExpression(new IntegerValue(10))),
+            new ForkStatement(
+                    new GroupStatement(
+                            new AssignmentStatement("v", new ArithmeticExpression(new VariableExpression("v"), new ValueExpression(new IntegerValue(1)), ArithmeticExpression.ArithmeticOperation.SUBTRACTION)),
+                            new AssignmentStatement("v", new ArithmeticExpression(new VariableExpression("v"), new ValueExpression(new IntegerValue(1)), ArithmeticExpression.ArithmeticOperation.SUBTRACTION)),
+                            new PrintStatement(new VariableExpression("v"))
+                    )
+            ),
+            new SleepStatement(new ValueExpression(new IntegerValue(10))),
+            new PrintStatement(new ArithmeticExpression(new VariableExpression("v"), new ValueExpression(new IntegerValue(10)), ArithmeticExpression.ArithmeticOperation.MULTIPLICATION))
+    );
+
+    public static IStatement PROGRAM13 = new GroupStatement(
+            new VariableDeclarationStatement("a", new RefType(new IntegerType())),
+            new VariableDeclarationStatement("b", new RefType(new IntegerType())),
+            new VariableDeclarationStatement("v", new IntegerType()),
+            new AllocateHeapStatement("a", new ValueExpression(new IntegerValue(0))),
+            new AllocateHeapStatement("b", new ValueExpression(new IntegerValue(0))),
+            new WriteHeapStatement("a", new ValueExpression(new IntegerValue(1))),
+            new WriteHeapStatement("b", new ValueExpression(new IntegerValue(2))),
+            new ConditionalAssignmentStatement(
+                    "v",
+                    new RelationalExpression(
+                            new ReadHeapExpression(new VariableExpression("a")),
+                            new ReadHeapExpression(new VariableExpression("b")),
+                            RelationalExpression.RelationalOperation.LESS_THAN
+                    ),
+                    new ValueExpression(new IntegerValue(100)),
+                    new ValueExpression(new IntegerValue(200))
+            ),
+            new PrintStatement(new VariableExpression("v")),
+            new ConditionalAssignmentStatement(
+                    "v",
+                    new RelationalExpression(
+                            new ArithmeticExpression(
+                                    new ReadHeapExpression(new VariableExpression("b")),
+                                    new ValueExpression(new IntegerValue(2)),
+                                    ArithmeticExpression.ArithmeticOperation.SUBTRACTION
+                            ),
+                            new ReadHeapExpression(new VariableExpression("a")),
+                            RelationalExpression.RelationalOperation.GREATER_THAN
+                    ),
+                    new ValueExpression(new IntegerValue(100)),
+                    new ValueExpression(new IntegerValue(200))
+            ),
+            new PrintStatement(new VariableExpression("v"))
+    );
+
+    public static IStatement PROGRAM14 = new GroupStatement(
+            new VariableDeclarationStatement("a", new RefType(new IntegerType())),
+            new AllocateHeapStatement("a", new ValueExpression(new IntegerValue(20))),
+            new ForStatement(
+                    "v",
+                    new ValueExpression(new IntegerValue(0)),
+                    new ValueExpression(new IntegerValue(3)),
+                    new ArithmeticExpression(
+                            new VariableExpression("v"),
+                            new ValueExpression(new IntegerValue(1)),
+                            ArithmeticExpression.ArithmeticOperation.ADDITION
+                    ),
+                    new ForkStatement(new GroupStatement(
+                            new PrintStatement(new VariableExpression("v")),
+                            new AssignmentStatement(
+                                    "v",
+                                    new ArithmeticExpression(
+                                            new VariableExpression("v"),
+                                            new ReadHeapExpression(new VariableExpression("a")),
+                                            ArithmeticExpression.ArithmeticOperation.MULTIPLICATION
+                                    )
+                            )
+                    ))
+            ),
+            new PrintStatement(new ReadHeapExpression(new VariableExpression("a")))
+    );
+
+    public static List<IStatement> programList = new ArrayList<>(List.of(PROGRAM1, PROGRAM2, PROGRAM3, PROGRAM4, PROGRAM5, PROGRAM6, PROGRAM7, PROGRAM8, PROGRAM9, PROGRAM10, PROGRAM11, PROGRAM12, PROGRAM13, PROGRAM14));
 }
