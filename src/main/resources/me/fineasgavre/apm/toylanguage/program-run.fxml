@@ -53,6 +53,20 @@
                         <ListView fx:id="fileTable" />
                      </children>
                   </VBox>
+                  <VBox HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Procedure Table" />
+                        <TableView fx:id="procedureTable">
+                           <columns>
+                              <TableColumn fx:id="procedureTableNameColumn" prefWidth="75.0" text="Name" />
+                              <TableColumn fx:id="procedureTableStatementColumn" prefWidth="75.0" text="Statement" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </VBox>
                </children>
                <opaqueInsets>
                   <Insets right="10.0" />
