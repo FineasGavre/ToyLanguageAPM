@@ -9,4 +9,5 @@ public interface ITLStack<T> {
     void push(T v);
     boolean isEmpty();
     Stack<T> getStack();
+    T peek();
 }

@@ -29,8 +29,6 @@ public class TLMap<K, V> implements ITLMap<K, V> {
         return map.containsKey(key);
     }
 
-
-
     @Override
     public void clear() {
         map.clear();

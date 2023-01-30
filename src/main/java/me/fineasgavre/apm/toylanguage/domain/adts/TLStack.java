@@ -1,13 +1,17 @@
 package me.fineasgavre.apm.toylanguage.domain.adts;
 
 import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLStack;
-import me.fineasgavre.apm.toylanguage.exceptions.adt.EmptyStackPopTLException;
 import me.fineasgavre.apm.toylanguage.exceptions.TLException;
+import me.fineasgavre.apm.toylanguage.exceptions.adt.EmptyStackPopTLException;
 
 import java.util.Stack;
 
 public class TLStack<T> implements ITLStack<T> {
-    private final Stack<T> stack = new Stack<>();
+    private final Stack<T> stack;
+
+    public TLStack() {
+        this.stack = new Stack<>();
+    }
 
     @Override
     public T pop() throws TLException {
@@ -31,6 +35,11 @@ public class TLStack<T> implements ITLStack<T> {
     @Override
     public Stack<T> getStack() {
         return stack;
+    }
+
+    @Override
+    public T peek() {
+        return stack.peek();
     }
 
     @Override
