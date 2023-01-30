@@ -5,6 +5,7 @@ import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
 import me.fineasgavre.apm.toylanguage.domain.state.ProgramState;
 import me.fineasgavre.apm.toylanguage.domain.statements.interfaces.IStatement;
 import me.fineasgavre.apm.toylanguage.domain.types.interfaces.IType;
+import me.fineasgavre.apm.toylanguage.domain.values.interfaces.IValue;
 import me.fineasgavre.apm.toylanguage.exceptions.TLException;
 
 public class ForkStatement implements IStatement {
@@ -19,7 +20,10 @@ public class ForkStatement implements IStatement {
         var newExecutionStack = new TLStack<IStatement>();
         newExecutionStack.push(statement);
 
-        return new ProgramState(newExecutionStack, programState.getSymbolTable().clone(), programState.getHeap(), programState.getFileTable(), programState.getOutput(), programState.getOriginalStatement());
+        var newSymbolTableStack = new TLStack<ITLMap<String, IValue>>();
+        programState.getSymbolTableStack().getStack().forEach(e -> newSymbolTableStack.push(e.clone()));
+
+        return new ProgramState(newExecutionStack, newSymbolTableStack, programState.getHeap(), programState.getFileTable(), programState.getOutput(), programState.getOriginalStatement());
     }
 
     @Override

@@ -19,13 +19,13 @@ import java.io.BufferedReader;
 public class ProgramState {
     private static int nextId = 1;
 
-    private synchronized static int getNextId() {
+    private static synchronized int getNextId() {
         return nextId++;
     }
 
     private final int id;
     private ITLStack<IStatement> executionStack;
-    private ITLMap<String, IValue> symbolTable;
+    private ITLStack<ITLMap<String, IValue>> symbolTableStack;
     private ITLHeap<IValue> heap;
     private ITLMap<StringValue, BufferedReader> fileTable;
     private ITLList<IValue> output;
@@ -34,19 +34,21 @@ public class ProgramState {
 
     public ProgramState(IStatement originalStatement) {
         this.executionStack = new TLStack<>();
-        this.symbolTable = new TLMap<>();
+        this.symbolTableStack = new TLStack<>();
         this.heap = new TLHeap<>();
         this.fileTable = new TLMap<>();
         this.output = new TLList<>();
         this.id = getNextId();
 
+        this.symbolTableStack.push(new TLMap<>());
+
         this.originalStatement = originalStatement.clone();
         this.executionStack.push(originalStatement);
     }
 
-    public ProgramState(ITLStack<IStatement> executionStack, ITLMap<String, IValue> symbolTable, ITLHeap<IValue> heap, ITLMap<StringValue, BufferedReader> fileTable, ITLList<IValue> output, IStatement originalStatement) {
+    public ProgramState(ITLStack<IStatement> executionStack, ITLStack<ITLMap<String, IValue>> symbolTableStack, ITLHeap<IValue> heap, ITLMap<StringValue, BufferedReader> fileTable, ITLList<IValue> output, IStatement originalStatement) {
         this.executionStack = executionStack;
-        this.symbolTable = symbolTable;
+        this.symbolTableStack = symbolTableStack;
         this.heap = heap;
         this.fileTable = fileTable;
         this.output = output;
@@ -73,11 +75,15 @@ public class ProgramState {
     }
 
     public ITLMap<String, IValue> getSymbolTable() {
-        return symbolTable;
+        return symbolTableStack.peek();
     }
 
-    public void setSymbolTable(ITLMap<String, IValue> symbolTable) {
-        this.symbolTable = symbolTable;
+    public ITLStack<ITLMap<String, IValue>> getSymbolTableStack() {
+        return symbolTableStack;
+    }
+
+    public void setSymbolTableStack(ITLStack<ITLMap<String, IValue>> symbolTableStack) {
+        this.symbolTableStack = symbolTableStack;
     }
 
     public ITLHeap<IValue> getHeap() {
@@ -120,7 +126,7 @@ public class ProgramState {
     public String toString() {
         return "ProgramState{" +
                 "executionStack=" + executionStack +
-                ", symbolTable=" + symbolTable +
+                ", symbolTableStack=" + symbolTableStack +
                 ", heap=" + heap +
                 ", output=" + output +
                 ", originalStatement=" + originalStatement +
