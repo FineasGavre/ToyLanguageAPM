@@ -1,20 +1,16 @@
 package me.fineasgavre.apm.toylanguage.domain.state;
 
-import me.fineasgavre.apm.toylanguage.domain.adts.TLHeap;
-import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLHeap;
-import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLList;
-import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLMap;
-import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.ITLStack;
-import me.fineasgavre.apm.toylanguage.domain.adts.TLList;
-import me.fineasgavre.apm.toylanguage.domain.adts.TLMap;
-import me.fineasgavre.apm.toylanguage.domain.adts.TLStack;
+import me.fineasgavre.apm.toylanguage.domain.adts.*;
+import me.fineasgavre.apm.toylanguage.domain.adts.interfaces.*;
 import me.fineasgavre.apm.toylanguage.domain.statements.interfaces.IStatement;
+import me.fineasgavre.apm.toylanguage.domain.types.interfaces.IType;
 import me.fineasgavre.apm.toylanguage.domain.values.interfaces.IValue;
 import me.fineasgavre.apm.toylanguage.domain.values.StringValue;
 import me.fineasgavre.apm.toylanguage.exceptions.TLException;
 import me.fineasgavre.apm.toylanguage.exceptions.execution.EmptyExecutionStackTLException;
 
 import java.io.BufferedReader;
+import java.util.List;
 
 public class ProgramState {
     private static int nextId = 1;
@@ -29,6 +25,7 @@ public class ProgramState {
     private ITLHeap<IValue> heap;
     private ITLMap<StringValue, BufferedReader> fileTable;
     private ITLList<IValue> output;
+    private ITLProcedureTable<String, List<ITLPair<String, IType>>, IStatement> procedureTable;
 
     private final IStatement originalStatement;
 
@@ -38,6 +35,7 @@ public class ProgramState {
         this.heap = new TLHeap<>();
         this.fileTable = new TLMap<>();
         this.output = new TLList<>();
+        this.procedureTable = new TLProcedureTable<>();
         this.id = getNextId();
 
         this.symbolTableStack.push(new TLMap<>());
@@ -46,12 +44,13 @@ public class ProgramState {
         this.executionStack.push(originalStatement);
     }
 
-    public ProgramState(ITLStack<IStatement> executionStack, ITLStack<ITLMap<String, IValue>> symbolTableStack, ITLHeap<IValue> heap, ITLMap<StringValue, BufferedReader> fileTable, ITLList<IValue> output, IStatement originalStatement) {
+    public ProgramState(ITLStack<IStatement> executionStack, ITLStack<ITLMap<String, IValue>> symbolTableStack, ITLHeap<IValue> heap, ITLMap<StringValue, BufferedReader> fileTable, ITLList<IValue> output, ITLProcedureTable<String, List<ITLPair<String, IType>>, IStatement> procedureTable, IStatement originalStatement) {
         this.executionStack = executionStack;
         this.symbolTableStack = symbolTableStack;
         this.heap = heap;
         this.fileTable = fileTable;
         this.output = output;
+        this.procedureTable = procedureTable;
         this.id = getNextId();
 
         this.originalStatement = originalStatement.clone();
@@ -108,6 +107,10 @@ public class ProgramState {
 
     public void setOutput(ITLList<IValue> output) {
         this.output = output;
+    }
+
+    public ITLProcedureTable<String, List<ITLPair<String, IType>>, IStatement> getProcedureTable() {
+        return procedureTable;
     }
 
     public IStatement getOriginalStatement() {

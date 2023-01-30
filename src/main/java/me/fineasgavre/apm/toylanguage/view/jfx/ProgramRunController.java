@@ -28,6 +28,15 @@ public class ProgramRunController {
     private TableColumn<PairItem<String>, String> heapTableValueColumn;
 
     @FXML
+    private TableView<PairItem<String>> procedureTable;
+
+    @FXML
+    private TableColumn<PairItem<String>, String> procedureTableNameColumn;
+
+    @FXML
+    private TableColumn<PairItem<String>, String> procedureTableStatementColumn;
+
+    @FXML
     private ListView<String> outputTable;
 
     @FXML
@@ -63,6 +72,8 @@ public class ProgramRunController {
         heapTableValueColumn.setCellValueFactory(new PropertyValueFactory<>("second"));
         symbolTableIdColumn.setCellValueFactory(new PropertyValueFactory<>("first"));
         symbolTableValueColumn.setCellValueFactory(new PropertyValueFactory<>("second"));
+        procedureTableNameColumn.setCellValueFactory(new PropertyValueFactory<>("first"));
+        procedureTableStatementColumn.setCellValueFactory(new PropertyValueFactory<>("second"));
 
         updateProgramCount(0);
         setupProgramStateIdSelection();
@@ -117,6 +128,7 @@ public class ProgramRunController {
         updateOutputTable(snapshot.getOutputSnapshot());
         updateFileTable(snapshot.getFileTableSnapshot());
         updateProgramStates(snapshot.getProgramStateSnapshots().stream().map(e -> Integer.toString(e.getProgramStateId())).toList());
+        updateProcedureTable(snapshot.getProcedureTableSnapshot());
 
         if (selectedProgramStateId != null) {
             var selectedProgramState = snapshot.getProgramStateSnapshots().stream().filter(e -> e.getProgramStateId() == selectedProgramStateId).findFirst();
@@ -133,6 +145,11 @@ public class ProgramRunController {
     private void updateHeapTable(List<PairItem<String>> heapSnapshot) {
         heapTable.getItems().clear();
         heapTable.getItems().addAll(heapSnapshot);
+    }
+
+    private void updateProcedureTable(List<PairItem<String>> procedureTableSnapshot) {
+        procedureTable.getItems().clear();
+        procedureTable.getItems().addAll(procedureTableSnapshot);
     }
 
     private void updateOutputTable(List<String> outputSnapshot) {

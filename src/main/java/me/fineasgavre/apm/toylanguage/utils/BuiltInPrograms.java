@@ -1,5 +1,6 @@
 package me.fineasgavre.apm.toylanguage.utils;
 
+import me.fineasgavre.apm.toylanguage.domain.adts.TLPair;
 import me.fineasgavre.apm.toylanguage.domain.expressions.*;
 import me.fineasgavre.apm.toylanguage.domain.statements.*;
 import me.fineasgavre.apm.toylanguage.domain.statements.interfaces.IStatement;
@@ -329,5 +330,82 @@ public class BuiltInPrograms {
             new PrintStatement(new ReadHeapExpression(new VariableExpression("a")))
     );
 
-    public static List<IStatement> programList = new ArrayList<>(List.of(PROGRAM1, PROGRAM2, PROGRAM3, PROGRAM4, PROGRAM5, PROGRAM6, PROGRAM7, PROGRAM8, PROGRAM9, PROGRAM10, PROGRAM11, PROGRAM12, PROGRAM13, PROGRAM14));
+    private static IStatement PROGRAM15 = new GroupStatement(
+            new DefineProcedureStatement(
+                    "sum",
+                    List.of(
+                            new TLPair<>("a", new IntegerType()),
+                            new TLPair<>("b", new IntegerType())
+                    ),
+                    new GroupStatement(
+                            new VariableDeclarationStatement("v", new IntegerType()),
+                            new AssignmentStatement(
+                                    "v",
+                                    new ArithmeticExpression(
+                                            new VariableExpression("a"),
+                                            new VariableExpression("b"),
+                                            ArithmeticExpression.ArithmeticOperation.ADDITION
+                                    )
+                            ),
+                            new PrintStatement(new VariableExpression("v"))
+                    )
+            ),
+            new DefineProcedureStatement(
+                    "product",
+                    List.of(
+                            new TLPair<>("a", new IntegerType()),
+                            new TLPair<>("b", new IntegerType())
+                    ),
+                    new GroupStatement(
+                            new VariableDeclarationStatement("v", new IntegerType()),
+                            new AssignmentStatement(
+                                    "v",
+                                    new ArithmeticExpression(
+                                            new VariableExpression("a"),
+                                            new VariableExpression("b"),
+                                            ArithmeticExpression.ArithmeticOperation.MULTIPLICATION
+                                    )
+                            ),
+                            new PrintStatement(new VariableExpression("v"))
+                    )
+            ),
+            new VariableDeclarationStatement("v", new IntegerType()),
+            new AssignmentStatement("v", new ValueExpression(new IntegerValue(2))),
+            new VariableDeclarationStatement("w", new IntegerType()),
+            new AssignmentStatement("w", new ValueExpression(new IntegerValue(5))),
+            new CallProcedureStatement(
+                    "sum",
+                    List.of(
+                            new ArithmeticExpression(
+                                    new VariableExpression("v"),
+                                    new ValueExpression(new IntegerValue(10)),
+                                    ArithmeticExpression.ArithmeticOperation.MULTIPLICATION
+                            ),
+                            new VariableExpression("w")
+                    )
+            ),
+            new PrintStatement(new VariableExpression("v")),
+            new ForkStatement(
+                    new GroupStatement(
+                            new CallProcedureStatement(
+                                    "product",
+                                    List.of(
+                                            new VariableExpression("v"),
+                                            new VariableExpression("w")
+                                    )
+                            ),
+                            new ForkStatement(
+                                    new CallProcedureStatement(
+                                            "sum",
+                                            List.of(
+                                                    new VariableExpression("v"),
+                                                    new VariableExpression("w")
+                                            )
+                                    )
+                            )
+                    )
+            )
+    );
+
+    public static List<IStatement> programList = new ArrayList<>(List.of(PROGRAM1, PROGRAM2, PROGRAM3, PROGRAM4, PROGRAM5, PROGRAM6, PROGRAM7, PROGRAM8, PROGRAM9, PROGRAM10, PROGRAM11, PROGRAM12, PROGRAM13, PROGRAM14, PROGRAM15));
 }

@@ -211,7 +211,17 @@ public class ProgramStateController {
         var heapSnapshot = mainProgramState.getHeap().getContent().getMap().entrySet().stream().map(e -> new PairItem<>(e.getKey().toString(), e.getValue().toString())).toList();
         var fileTableSnapshot = mainProgramState.getFileTable().getMap().keySet().stream().map(e -> e.getValue()).toList();
         var outputSnapshot = mainProgramState.getOutput().getList().stream().map(e -> e.toString()).toList();
+        var procedureTableSnapshot = mainProgramState.getProcedureTable().getMap().keySet().stream().map(e -> {
+            var procedureDefinition = mainProgramState.getProcedureTable().getMap().get(e);
 
-        return new ExecutionStateSnapshot(heapSnapshot, outputSnapshot, fileTableSnapshot, programStateSnapshots);
+            StringBuilder procedureName = new StringBuilder(e + " (");
+            for (var parameter : procedureDefinition.getKey()) {
+                procedureName.append(parameter.getSecond()).append(" ").append(parameter.getFirst()).append(",");
+            }
+
+            return new PairItem<String>(procedureName.toString(), procedureDefinition.getValue().toString());
+        }).toList();
+
+        return new ExecutionStateSnapshot(heapSnapshot, outputSnapshot, fileTableSnapshot, programStateSnapshots, procedureTableSnapshot);
     }
 }
